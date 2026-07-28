@@ -29,6 +29,7 @@ from scipy.linalg import orthogonal_procrustes
 from threadpoolctl import threadpool_info, threadpool_limits
 
 from certificates.claim3 import run_claim3_certificate
+from certificates.claim4 import run_claim4_certificate
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -170,7 +171,7 @@ def claim_3() -> dict:
     return certificate
 
 
-def claim_4() -> dict:
+def claim_4_historical() -> dict:
     """Historical toy check on finitely supported one-dimensional measures."""
     base = np.array([-2.0, -1.0, 0.0, 0.5, 1.5, 2.0])
     integrals = {}
@@ -201,6 +202,13 @@ def claim_4() -> dict:
         "subalgebra_product_constructor_error": product_error,
         "limitation": "Finite atomic measures do not establish density on arbitrary compact Wasserstein subsets.",
     }
+
+
+def claim_4() -> dict:
+    historical = claim_4_historical()
+    certificate = run_claim4_certificate()
+    certificate["historical_toy_regression"] = historical
+    return certificate
 
 
 def claim_5() -> dict:
@@ -284,7 +292,7 @@ def main() -> int:
         }
     passed = all(item["check_passed"] for item in claims.values())
     report = {
-        "artifact_kind": "cumulative_reproduction_with_claim_3_certificate",
+        "artifact_kind": "cumulative_reproduction_through_claim_4_certificate",
         "paper": "arXiv:2605.23156",
         "judge_space_revision": "ad3feb1493175f9af2a232174cd89d3a2688bd6b",
         "live_judged_score": "9/12",
@@ -301,7 +309,7 @@ def main() -> int:
     }
     (OUT / "verdict.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))
-    print("\nCURRENT CERTIFICATE: Claim 3 VERIFIED; Claims 4-5 remain historical TOY.")
+    print("\nCURRENT CERTIFICATES: Claims 3-4 VERIFIED; Claim 5 remains historical TOY.")
     print(f"CUMULATIVE REGRESSION {'PASS' if passed else 'FAIL'}")
     return 0 if passed else 1
 
