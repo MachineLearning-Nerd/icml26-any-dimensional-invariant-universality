@@ -11,6 +11,12 @@ Current evidence assessment: all six contracts are **VERIFIED** internally.
 The conservative projected score is **11–12/12** and the best-supported
 possible score is **12/12**, both forecasts—not live judge results.
 
+Published Space revision:
+[`b0dc5a7f233057ffdd81b477589074950001898e`](https://huggingface.co/spaces/DineshAI/wRVTDcEMv8/commit/b0dc5a7f233057ffdd81b477589074950001898e).
+The submission is awaiting a live judge verdict; the score remains 9/12 until
+that happens. The exact 36-file published text tree is mirrored under
+[`publication/published_space`](publication/published_space).
+
 Key observed numbers:
 
 - Equation 4 grows **13.743989×** over a 64× horizon, while Equation 5 changes
@@ -50,6 +56,7 @@ uv run --frozen python repro/src/verify.py
 | [Claim 4 certificate](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/claim-4-eq6-wasserstein-proof-certificate) | Add Wasserstein tail/noncompact-UAT certificate | `uv run --frozen python repro/src/verify.py` | Claim 4 VERIFIED, MEDIUM confidence; cumulative pass | HF `cpu-upgrade`, 21 s |
 | [Claim 5 certificate](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/claim-5-graphon-basis-proof-certificate) | Add arbitrary-m Boolean-lattice certificate | `uv run --frozen python repro/src/verify.py` | Claim 5 VERIFIED; all six cumulative claims pass | HF `cpu-upgrade`, 26 s |
 | [Release candidate](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/evaluator-visible-release-candidate) | Package canonical Space pages, report, notebook, manifests, and red-team audit | `uv run --frozen python repro/src/verify.py` | All six cumulative claim checks pass; packaging gates complete | HF `cpu-upgrade` |
+| [Published mirror](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/published-space-and-github-mirror) | Mirror exact published Space revision and finalize GitHub surface | `uv run --frozen python repro/src/verify.py` | 36/36 published text hashes match; all six cumulative checks pass | HF `cpu-upgrade` |
 
 ## Reproduce locally
 

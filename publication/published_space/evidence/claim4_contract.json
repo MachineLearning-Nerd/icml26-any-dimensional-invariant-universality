@@ -1,0 +1,26 @@
+{
+  "claim_id": 4,
+  "paper": "arXiv:2605.23156v1",
+  "statement": "Equation 6 is W_p-continuous for continuous p-growth rho and continuous sigma; for every compact Q in P_p(R^k), its neural class is dense in C(Q) when the activation is Lipschitz, continuous, nonpolynomial, and asymptotically polynomial at both infinities.",
+  "anchors": [
+    "Equation 6",
+    "Theorem 4.5",
+    "Theorem 4.6",
+    "Appendix B.4",
+    "Appendix B.5"
+  ],
+  "acceptance": [
+    "W_p continuity is linked to the exact p-growth convergence characterization",
+    "subalgebra constructors and their growth closure are explicit",
+    "measure separation is constructive",
+    "tightness and p-uniform-integrability close the tail budget",
+    "the global C_0 UAT premise is audited against its primary source",
+    "an independent checker exits zero",
+    "growth, constructor, and error-budget controls are rejected"
+  ],
+  "verdict_values": [
+    "VERIFIED",
+    "FALSIFIED",
+    "BLOCKED"
+  ]
+}

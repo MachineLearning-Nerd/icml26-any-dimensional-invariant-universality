@@ -1,0 +1,18 @@
+{
+  "protected_revision": "ad3feb1493175f9af2a232174cd89d3a2688bd6b",
+  "original_file_count": 15,
+  "candidate_file_count": 45,
+  "old_file_set_is_subset": true,
+  "missing_old_paths": [],
+  "old_paths_with_modified_navigation_content": [
+    "README.md",
+    "logbook.json",
+    "pages/index.md"
+  ],
+  "modified_originals_archived_byte_exact": true,
+  "archive_mismatches": [],
+  "unchanged_historical_pages": {
+    "pages/verify/page.md": true,
+    "pages/overview/page.md": true
+  }
+}

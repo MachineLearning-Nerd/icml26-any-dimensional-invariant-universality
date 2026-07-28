@@ -1,0 +1,80 @@
+{
+  "artifact_kind": "complete_six_claim_cumulative_reproduction",
+  "paper": "arXiv:2605.23156",
+  "previous_live_judged_score": "9/12",
+  "protected_judged_revision": "ad3feb1493175f9af2a232174cd89d3a2688bd6b",
+  "git_sha": "a63d9eaeb0fe8eaf4dd94a5c1f6ffdec93050bd5",
+  "backend": "hf",
+  "flavor": "cpu-upgrade",
+  "available_logical_cpus": 64,
+  "enforced_math_threads": 1,
+  "verifier_runtime_seconds": 5.294494376052171,
+  "job_duration_seconds": 26,
+  "seeds": {
+    "baseline": 7,
+    "claim_3": 260523156,
+    "claim_4": 260523157,
+    "claim_5": 260523158
+  },
+  "claims": {
+    "1": {
+      "status": "VERIFIED",
+      "eq4_sums": [42.87816080056619, 103.33479829735921, 247.17526522203073, 589.3169534068679],
+      "eq5_sums": [1.768843958885639, 1.7766083669766746, 1.7789217322447233, 1.7796098715332127],
+      "growth_ratio": 13.74398860407945,
+      "analytic_ratio": 13.454342644059432,
+      "relative_tail_change": 0.006049591441240062
+    },
+    "2": {
+      "status": "VERIFIED",
+      "n": [4, 6, 8, 11, 14, 16],
+      "cut_W": [0.25, 0.16666666666666666, 0.125, 0.09090909090909091, 0.07142857142857142, 0.0625],
+      "cut_W_squared": [1, 1, 1, 1, 1, 1],
+      "cut_3W": [0.75, 0.5, 0.375, 0.2727272727272727, 0.21428571428571427, 0.1875]
+    },
+    "3": {
+      "status": "VERIFIED",
+      "constructor_instances": 128,
+      "max_valid_constructor_or_invariance_error": 4.440892098500626e-16,
+      "separation_pairs": 2415,
+      "minimum_separation_gap": 1.0,
+      "max_tail_bound_ratio": 0.7100366545307475,
+      "unweighted_control_growth": 13.703378161785412,
+      "mutated_product_min_error": 0.02895849228885916,
+      "mutated_inner_budget": "2*delta"
+    },
+    "4": {
+      "status": "VERIFIED",
+      "atomic_continuity_pairs": 256,
+      "max_KR_ratio": 0.7972251748726317,
+      "measure_separation_pairs": 2415,
+      "minimum_integral_gap": "1/4",
+      "uniform_second_moment_tails": ["1/4", "1/16", "1/64", "1/256", "1/1024"],
+      "growth_control_W2": [0.5, 0.3535533905932738, 0.25, 0.1767766952966369],
+      "growth_control_log_integral_lower_bound": [-0.1588830833596715, 1.7616753749604932, 7.682233833280657, 21.60279229160082],
+      "mutated_tail_budget": "3*delta/2"
+    },
+    "5": {
+      "status": "VERIFIED",
+      "labeled_graphs_exhausted": 33866,
+      "symbolic_expansion_terms": 64,
+      "symbolic_residual": "0",
+      "exact_target_step_graphon_comparisons": 32,
+      "exact_generic_expansion_comparisons": 2,
+      "independent_step_graphon_cases": 442,
+      "simple_edge_second_derivative": "0",
+      "repeated_edge_second_derivative": "2",
+      "repeated_edge_second_finite_difference": "2/9"
+    },
+    "6": {
+      "status": "VERIFIED",
+      "random_cloud_pairs": 30,
+      "max_lipschitz_ratio": 0.110688992007003,
+      "bound": 0.5,
+      "gram_invariance_error": 4.718447854656915e-16,
+      "procrustes_recovery_error": 4.440892098500626e-16,
+      "negative_control_gram_gap": 3.8056134550125673
+    }
+  },
+  "regression_passed": true
+}

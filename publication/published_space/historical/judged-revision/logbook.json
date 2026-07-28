@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "title": "Any-Dimensional Invariant Universality (wRVTDcEMv8)",
+  "emoji": "🎯",
+  "space_id": "DineshAI/wRVTDcEMv8",
+  "paper": null,
+  "tags": [
+    "icml2026-repro",
+    "paper-wRVTDcEMv8"
+  ],
+  "updated_at": "2026-07-28T06:24:40+00:00",
+  "root": {
+    "slug": "index",
+    "title": "Any-Dimensional Invariant Universality (wRVTDcEMv8)",
+    "file": "pages/index.md",
+    "children": [
+      {
+        "slug": "verify",
+        "title": "verify",
+        "file": "pages/verify/page.md",
+        "children": []
+      },
+      {
+        "slug": "overview",
+        "title": "overview",
+        "file": "pages/overview/page.md",
+        "children": []
+      }
+    ]
+  },
+  "agent_view_tokens": 1178,
+  "revision": "1785219880396506891"
+}
