@@ -1,0 +1,23 @@
+{
+  "paper": "Any-Dimensional Invariant Universality",
+  "arxiv_id": "2605.23156v1",
+  "retrieved_at": "2026-07-28",
+  "html_url": "https://ar5iv.labs.arxiv.org/html/2605.23156",
+  "html_sha256": "08550eb2200d91fcba610f1008e7cb0e207049aee014b5d31f9f5501d6cda5f3",
+  "source_url": "https://export.arxiv.org/e-print/2605.23156",
+  "source_sha256": "86929d4f4e75744d3ce0bc8c100003febd6bb4130a85d1faa2414c02db5aae0b",
+  "retrieval_user_agent": "OpenResearch-Reproduction/1.0 (+https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality)",
+  "anchors": {
+    "claim_1": "body.tex: eq:deep_sets; Section sec:set zero-padding; discussion immediately before Eq. equ:zeropadding Deepset form",
+    "claim_2": "body.tex:440; Section sec:graph",
+    "claim_3": "body.tex: equ:zeropadding Deepset form; thm:ZeropaddingContinuous; thm:ZeropaddingUniversality; appendix.tex:137-328",
+    "claim_4": "body.tex: equ:normalized deepset form; thm:duplicationContinuity; thm:duplicationUniversality; appendix.tex:330-474",
+    "claim_5": "body.tex: eq:homo; equ:CompleteGraphModel; equ:SpanCompleteGraphModel; thm:graphContinue; thm:graphUniversal; appendix.tex:494-521",
+    "claim_6": "body.tex: eq:covarianceMap; thm:point cloud continuous; thm:point clouds universality; appendix Claim E.2"
+  },
+  "exact_quantifiers": {
+    "claim_3": "For p in [1,infinity), any norm on R^k, continuous rho and sigma give continuity; for every compact K subset ell_p(R^k), continuous non-polynomial activation implies F_DS is dense in C(K/G_infinity).",
+    "claim_4": "For p in [1,infinity), rho with componentwise p-growth and continuous sigma gives W_p continuity; for every compact Q subset P_p(R^k), Lipschitz continuous non-polynomial activation asymptotically polynomial at both infinities implies F_NDS dense in C(Q).",
+    "claim_5": "Every function in F_W is delta_cut continuous, and span over every m>=2 and all symmetric real a,b is dense in C(W_0,delta_cut)."
+  }
+}

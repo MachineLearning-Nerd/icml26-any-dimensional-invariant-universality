@@ -1,0 +1,12 @@
+{
+  "dataset": "ICML-2026-agent-repro/verdicts",
+  "dataset_url": "https://huggingface.co/datasets/ICML-2026-agent-repro/verdicts/resolve/main/verdicts.json",
+  "retrieved_at": "2026-07-28",
+  "dataset_sha256": "470902e334497b1f4e42c9cd8b06ce939a984567f2aa8446b9aa4fe5cfe584aa",
+  "filter": "space_id == \"DineshAI/wRVTDcEMv8\"",
+  "space_id": "DineshAI/wRVTDcEMv8",
+  "sha": "ad3feb1493175f9af2a232174cd89d3a2688bd6b",
+  "judged_at": "2026-07-28T08:03:17+00:00",
+  "score": "9/12",
+  "verdicts": ["VERIFIED", "VERIFIED", "TOY", "TOY", "TOY", "VERIFIED"]
+}
