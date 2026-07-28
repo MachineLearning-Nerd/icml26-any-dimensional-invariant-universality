@@ -1,0 +1,26 @@
+{
+  "claim_id": 5,
+  "paper": "arXiv:2605.23156v1",
+  "statement": "The Equations 9-10 model family is continuous in the cut metric and dense in the continuous real-valued functions on [0,1]-valued graphon space.",
+  "anchors": [
+    "Equations 9-10",
+    "Theorem 4.9",
+    "Theorem 4.10",
+    "Appendix C.2",
+    "Appendix C.3"
+  ],
+  "acceptance": [
+    "the full Boolean edge-lattice expansion is certified",
+    "the parameter choice isolates t(F,W) for every finite simple F",
+    "all 33,866 labeled simple graphs through six vertices are exhausted",
+    "selected identities are independently evaluated on exact rational step graphons",
+    "primary continuity and density premises are identified",
+    "a repeated-edge mutation is rejected",
+    "the independent checker exits zero"
+  ],
+  "verdict_values": [
+    "VERIFIED",
+    "FALSIFIED",
+    "BLOCKED"
+  ]
+}

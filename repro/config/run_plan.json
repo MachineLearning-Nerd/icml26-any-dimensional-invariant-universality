@@ -5,10 +5,11 @@
   "gpu_allowed": false,
   "estimated_algorithm_cores": 1,
   "enforced_math_threads": 1,
-  "routing_reason": "The cumulative Claim 4 proof-certificate run is single-threaded but has uncertain cold-start and exhaustive-check runtime; user policy requires Hugging Face cpu-upgrade.",
+  "routing_reason": "The cumulative Claim 5 proof-certificate run is single-threaded but exhausts 33,866 graphs and exact step assignments; runtime is uncertain, so user policy requires Hugging Face cpu-upgrade.",
   "fixed_command": "uv run --frozen python repro/src/verify.py",
   "seed": 7,
   "claim_3_seed": 260523156,
   "claim_4_seed": 260523157,
-  "experiment": "Claim 4 Eq6 Wasserstein proof certificate"
+  "claim_5_seed": 260523158,
+  "experiment": "Claim 5 graphon basis proof certificate"
 }

@@ -30,6 +30,7 @@ from threadpoolctl import threadpool_info, threadpool_limits
 
 from certificates.claim3 import run_claim3_certificate
 from certificates.claim4 import run_claim4_certificate
+from certificates.claim5 import run_claim5_certificate
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -211,7 +212,7 @@ def claim_4() -> dict:
     return certificate
 
 
-def claim_5() -> dict:
+def claim_5_historical() -> dict:
     """Historical toy check for two motifs and one continuity instance."""
     n = 12
     grid = (np.arange(n) + 0.5) / n
@@ -239,6 +240,13 @@ def claim_5() -> dict:
         "three_edge_cut_bound": 3 * cut,
         "limitation": "Two motifs and one graphon pair do not establish HD subset F_W for every simple graph.",
     }
+
+
+def claim_5() -> dict:
+    historical = claim_5_historical()
+    certificate = run_claim5_certificate()
+    certificate["historical_toy_regression"] = historical
+    return certificate
 
 
 def claim_6() -> dict:
@@ -292,7 +300,7 @@ def main() -> int:
         }
     passed = all(item["check_passed"] for item in claims.values())
     report = {
-        "artifact_kind": "cumulative_reproduction_through_claim_4_certificate",
+        "artifact_kind": "complete_six_claim_cumulative_reproduction",
         "paper": "arXiv:2605.23156",
         "judge_space_revision": "ad3feb1493175f9af2a232174cd89d3a2688bd6b",
         "live_judged_score": "9/12",
@@ -309,7 +317,7 @@ def main() -> int:
     }
     (OUT / "verdict.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))
-    print("\nCURRENT CERTIFICATES: Claims 3-4 VERIFIED; Claim 5 remains historical TOY.")
+    print("\nCURRENT CERTIFICATES: Claims 3-5 VERIFIED; all six cumulative claims pass.")
     print(f"CUMULATIVE REGRESSION {'PASS' if passed else 'FAIL'}")
     return 0 if passed else 1
 
