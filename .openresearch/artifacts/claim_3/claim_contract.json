@@ -1,0 +1,33 @@
+{
+  "claim_id": 3,
+  "paper": "arXiv:2605.23156v1",
+  "statement": "For p in [1,infinity), Equation 5 is continuous on the ell_p(R^k) orbit space; for every compact K subset ell_p(R^k) and every continuous non-polynomial activation, the Equation 5 neural class is dense in C(K/G_infinity).",
+  "anchors": [
+    "Equation 5",
+    "Theorem 4.2",
+    "Theorem 4.3",
+    "Appendix B.2",
+    "Appendix B.3"
+  ],
+  "assumptions": [
+    "k is finite and the norm on R^k is fixed",
+    "p is in [1,infinity)",
+    "K is compact in ell_p(R^k)",
+    "rho and sigma are continuous for continuity",
+    "the neural activation is continuous and non-polynomial for universality",
+    "G_infinity acts by finite permutations and the quotient uses the symmetrized ell_p metric"
+  ],
+  "acceptance": [
+    "the uniform-tail continuity implication is checked",
+    "scalar, addition, and product constructors are explicit and mutation-tested",
+    "the multiset-separation construction is audited and independently exhausted on a finite domain",
+    "the inner/outer UAT error budget closes for arbitrary positive epsilon",
+    "the independent checker exits zero",
+    "all three destructive controls are rejected"
+  ],
+  "verdict_values": [
+    "VERIFIED",
+    "FALSIFIED",
+    "BLOCKED"
+  ]
+}

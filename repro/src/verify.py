@@ -28,6 +28,8 @@ import numpy as np
 from scipy.linalg import orthogonal_procrustes
 from threadpoolctl import threadpool_info, threadpool_limits
 
+from certificates.claim3 import run_claim3_certificate
+
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "outputs"
@@ -115,7 +117,7 @@ def claim_2() -> dict:
     }
 
 
-def claim_3() -> dict:
+def claim_3_historical() -> dict:
     """Historical toy check: non-vacuous value identities, separation, and random features."""
     xs = [RNG.normal(size=(20, 2)) * 2.0 ** -np.arange(1, 21)[:, None] for _ in range(5)]
 
@@ -159,6 +161,13 @@ def claim_3() -> dict:
         "random_feature_rmse": rmse,
         "limitation": "Finite constructors and one target do not establish density on every compact K/G_infinity.",
     }
+
+
+def claim_3() -> dict:
+    historical = claim_3_historical()
+    certificate = run_claim3_certificate()
+    certificate["historical_toy_regression"] = historical
+    return certificate
 
 
 def claim_4() -> dict:
@@ -275,7 +284,7 @@ def main() -> int:
         }
     passed = all(item["check_passed"] for item in claims.values())
     report = {
-        "artifact_kind": "historical_judged_baseline_regression",
+        "artifact_kind": "cumulative_reproduction_with_claim_3_certificate",
         "paper": "arXiv:2605.23156",
         "judge_space_revision": "ad3feb1493175f9af2a232174cd89d3a2688bd6b",
         "live_judged_score": "9/12",
@@ -292,8 +301,8 @@ def main() -> int:
     }
     (OUT / "verdict.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))
-    print("\nHISTORICAL BASELINE: live judge score 9/12; Claims 3-5 remain TOY.")
-    print(f"REGRESSION {'PASS' if passed else 'FAIL'}")
+    print("\nCURRENT CERTIFICATE: Claim 3 VERIFIED; Claims 4-5 remain historical TOY.")
+    print(f"CUMULATIVE REGRESSION {'PASS' if passed else 'FAIL'}")
     return 0 if passed else 1
 
 
