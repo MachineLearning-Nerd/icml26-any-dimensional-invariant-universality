@@ -1,0 +1,9 @@
+{
+  "implementation": "exact rational atomic measures; no certificate import",
+  "measures": 56,
+  "distinct_pairs_exhausted": 1540,
+  "constructor_cases": 56,
+  "wrong_addition_for_product_rejections": 56,
+  "passed": true,
+  "exit_code": 0
+}

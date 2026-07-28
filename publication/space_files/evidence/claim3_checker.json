@@ -1,0 +1,9 @@
+{
+  "implementation": "exact fractions; no import from certificate module",
+  "orbits": 56,
+  "distinct_orbit_pairs_exhausted": 1540,
+  "constructor_cases_exhausted": 1024,
+  "wrong_addition_for_product_rejections": 1024,
+  "passed": true,
+  "exit_code": 0
+}

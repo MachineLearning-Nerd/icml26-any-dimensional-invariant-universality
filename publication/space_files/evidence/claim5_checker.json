@@ -1,0 +1,9 @@
+{
+  "implementation": "separate exact-rational enumerator; no certificate import",
+  "step_graphon_parametrization_cases": 442,
+  "simple_edge_second_difference": "0",
+  "repeated_edge_second_difference": "2/9",
+  "repeated_edge_mutation_rejected": true,
+  "passed": true,
+  "exit_code": 0
+}
