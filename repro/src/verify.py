@@ -31,7 +31,12 @@ from threadpoolctl import threadpool_info, threadpool_limits
 from certificates.claim3 import run_claim3_certificate
 from certificates.claim4 import run_claim4_certificate
 from certificates.claim5 import run_claim5_certificate
-from empirical_positive import run_claim3_empirical, run_claim4_empirical
+from empirical_positive import (
+    run_claim3_empirical,
+    run_claim4_empirical,
+    run_claim5_empirical,
+    run_claim6_empirical,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -254,6 +259,10 @@ def claim_5_historical() -> dict:
 def claim_5() -> dict:
     historical = claim_5_historical()
     certificate = run_claim5_certificate()
+    empirical = run_claim5_empirical()
+    certificate["status"] = "VERIFIED"
+    certificate["check_passed"] = bool(certificate["check_passed"] and empirical["check_passed"])
+    certificate["primary_empirical_verification"] = empirical
     certificate["historical_toy_regression"] = historical
     return certificate
 
@@ -285,7 +294,7 @@ def claim_6() -> dict:
     y_bad = RNG.uniform(-r / math.sqrt(3), r / math.sqrt(3), size=(12, 3))
     negative_gap = float(np.max(abs(x @ x.T - y_bad @ y_bad.T)))
     ok &= gram_gap < 1e-12 and recovery < 1e-12 and negative_gap > 0.05
-    return {
+    historical = {
         "status": "VERIFIED",
         "check_passed": bool(ok),
         "max_lipschitz_ratio": max(ratios),
@@ -293,6 +302,13 @@ def claim_6() -> dict:
         "gram_invariance_error": gram_gap,
         "procrustes_recovery_error": recovery,
         "negative_control_gram_gap": negative_gap,
+    }
+    empirical = run_claim6_empirical()
+    return {
+        "status": "VERIFIED",
+        "check_passed": bool(historical["check_passed"] and empirical["check_passed"]),
+        "primary_empirical_verification": empirical,
+        "historical_accepted_regression": historical,
     }
 
 
@@ -326,7 +342,7 @@ def main() -> int:
     }
     (OUT / "verdict.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))
-    print("\nPRIMARY EMPIRICAL CHECKS: Claims 3-4 direct stress tests completed.")
+    print("\nPRIMARY EMPIRICAL CHECKS: Claims 3-6 direct stress tests completed.")
     print("CURRENT CERTIFICATES: Claims 3-5 implication audits completed.")
     print(f"CUMULATIVE REGRESSION {'PASS' if passed else 'FAIL'}")
     return 0 if passed else 1

@@ -7,6 +7,7 @@ assumption or architectural ingredient and must exhibit the predicted failure.
 from __future__ import annotations
 
 import json
+import itertools
 import math
 from pathlib import Path
 import subprocess
@@ -19,6 +20,8 @@ from scipy.stats import wasserstein_distance
 ROOT = Path(__file__).resolve().parents[2]
 SEED_C3 = 260523159
 SEED_C4 = 260523160
+SEED_C5 = 260523161
+SEED_C6 = 260523162
 
 
 def _run_independent_checker(claim: str) -> dict:
@@ -237,6 +240,275 @@ def run_claim4_empirical() -> dict:
             "The finite stress test targets the theorem's quantitative continuity "
             "mechanism; the accompanying constructive certificate separately "
             "exhausts a finite measure domain and audits the implication chain."
+        ),
+        "check_passed": bool(passed),
+    }
+
+
+def _cut_norm_step(matrix: np.ndarray) -> float:
+    """Exact cut norm of an equal-block step kernel."""
+    n = matrix.shape[0]
+    best = 0.0
+    for mask in range(1, 1 << n):
+        columns = [j for j in range(n) if mask & (1 << j)]
+        row_sums = matrix[:, columns].sum(axis=1)
+        best = max(
+            best,
+            float(row_sums[row_sums > 0].sum()),
+            float(-row_sums[row_sums < 0].sum()),
+        )
+    return best / (n * n)
+
+
+def _motif_densities(w: np.ndarray) -> dict[str, float]:
+    """Independent vectorized homomorphism densities for five motifs."""
+    n = w.shape[0]
+    degree = w.mean(axis=1)
+    return {
+        "edge_K2": float(w.mean()),
+        "path_P3": float(np.mean(degree**2)),
+        "triangle_K3": float(np.einsum("ij,jk,ki->", w, w, w) / n**3),
+        "star_K13": float(np.mean(degree**3)),
+        "cycle_C4": float(np.trace(w @ w @ w @ w) / n**4),
+    }
+
+
+def _eq9_target_density(w: np.ndarray, vertices: int, target_edges: set[tuple[int, int]]) -> float:
+    """Evaluate Eq. 9 with the paper's 0/1 parameters for one target graph."""
+    n = w.shape[0]
+    complete_edges = list(itertools.combinations(range(vertices), 2))
+    total = 0.0
+    for assignment in itertools.product(range(n), repeat=vertices):
+        product = 1.0
+        for edge in complete_edges:
+            a, b = ((1.0, 0.0) if edge in target_edges else (0.0, 1.0))
+            product *= a * w[assignment[edge[0]], assignment[edge[1]]] + b
+        total += product
+    return total / n**vertices
+
+
+def run_claim5_empirical() -> dict:
+    """Directly test homomorphism-density coordinates on graphon space."""
+    rng = np.random.default_rng(SEED_C5)
+    edge_counts = {
+        "edge_K2": 1,
+        "path_P3": 2,
+        "triangle_K3": 3,
+        "star_K13": 3,
+        "cycle_C4": 4,
+    }
+    ratios = {name: [] for name in edge_counts}
+    relabel_errors = {name: [] for name in edge_counts}
+    cut_norms = []
+    for _ in range(500):
+        n = 7
+        a = rng.uniform(size=(n, n))
+        b = rng.uniform(size=(n, n))
+        w = (a + a.T) / 2
+        u = (b + b.T) / 2
+        cut = _cut_norm_step(w - u)
+        cut_norms.append(cut)
+        density_w = _motif_densities(w)
+        density_u = _motif_densities(u)
+        for name in edge_counts:
+            ratios[name].append(abs(density_w[name] - density_u[name]) / cut)
+
+        permutation = rng.permutation(n)
+        density_permuted = _motif_densities(w[np.ix_(permutation, permutation)])
+        for name in edge_counts:
+            relabel_errors[name].append(abs(density_w[name] - density_permuted[name]))
+
+    # Compute Equation 9 through its complete-edge factors and compare with
+    # separate vectorized motif implementations.
+    motifs = {
+        "edge_K2": (2, {(0, 1)}),
+        "path_P3": (3, {(0, 1), (1, 2)}),
+        "triangle_K3": (3, {(0, 1), (0, 2), (1, 2)}),
+        "star_K13": (4, {(0, 1), (0, 2), (0, 3)}),
+        "cycle_C4": (4, {(0, 1), (1, 2), (2, 3), (0, 3)}),
+    }
+    parametrization_errors = {name: [] for name in motifs}
+    for _ in range(64):
+        a = rng.uniform(size=(7, 7))
+        w = (a + a.T) / 2
+        direct = _motif_densities(w)
+        for name, (vertices, edges) in motifs.items():
+            parametrized = _eq9_target_density(w, vertices, edges)
+            parametrization_errors[name].append(abs(parametrized - direct[name]))
+
+    # Same edge density is an intentionally insufficient coordinate.  A
+    # triangle plus isolated vertex and a four-vertex path both have 3 edges,
+    # but K3 density separates their graphons.
+    triangle_isolate = np.zeros((4, 4))
+    triangle_isolate[:3, :3] = 1
+    np.fill_diagonal(triangle_isolate, 0)
+    path4 = np.zeros((4, 4))
+    for left, right in [(0, 1), (1, 2), (2, 3)]:
+        path4[left, right] = path4[right, left] = 1
+    separation_left = _motif_densities(triangle_isolate)
+    separation_right = _motif_densities(path4)
+
+    # Tight control: a constant perturbation attains the edge-coordinate
+    # cut-norm ratio exactly, so an incorrect cut-norm normalizer is detected.
+    tight_w = np.full((7, 7), 0.7)
+    tight_u = np.full((7, 7), 0.2)
+    tight_cut = _cut_norm_step(tight_w - tight_u)
+    tight_edge_ratio = abs(tight_w.mean() - tight_u.mean()) / tight_cut
+
+    checker = _run_independent_checker("claim5")
+    max_ratios = {name: max(values) for name, values in ratios.items()}
+    passed = (
+        all(max_ratios[name] <= edge_counts[name] + 1e-10 for name in edge_counts)
+        and max(max(values) for values in relabel_errors.values()) < 2e-15
+        and max(max(values) for values in parametrization_errors.values()) < 2e-14
+        and abs(separation_left["edge_K2"] - separation_right["edge_K2"]) < 1e-15
+        and abs(separation_left["triangle_K3"] - separation_right["triangle_K3"]) > 0.09
+        and abs(tight_edge_ratio - 1) < 1e-14
+        and checker["passed"]
+    )
+    return {
+        "status": "VERIFIED",
+        "claim_scope": (
+            "Direct Eq. 9 parametrization, exact-cut-norm continuity and relabel "
+            "invariance for five homomorphism-density coordinates, plus separation."
+        ),
+        "seed": SEED_C5,
+        "random_step_graphon_pairs": 500,
+        "step_blocks": 7,
+        "cut_norm_computation": "exact exhaustive subset optimization",
+        "cut_norm_range": [min(cut_norms), max(cut_norms)],
+        "motif_edge_counts": edge_counts,
+        "maximum_gap_over_cut_norm": max_ratios,
+        "relabel_trials": 500,
+        "maximum_relabel_error": {
+            name: max(values) for name, values in relabel_errors.items()
+        },
+        "eq9_parametrization_graphons": 64,
+        "maximum_eq9_vs_direct_error": {
+            name: max(values) for name, values in parametrization_errors.items()
+        },
+        "same_edge_density_control": {
+            "triangle_plus_isolate": separation_left,
+            "path4": separation_right,
+            "edge_gap": abs(separation_left["edge_K2"] - separation_right["edge_K2"]),
+            "triangle_gap": abs(
+                separation_left["triangle_K3"] - separation_right["triangle_K3"]
+            ),
+        },
+        "tight_edge_ratio_control": tight_edge_ratio,
+        "independent_checker": checker,
+        "limitations": (
+            "The sweep directly tests five basis coordinates and the Eq. 9 "
+            "realization; the symbolic certificate separately exhausts all labeled "
+            "simple graphs through six vertices and audits the arbitrary-m argument."
+        ),
+        "check_passed": bool(passed),
+    }
+
+
+def _scale_cloud(x: np.ndarray, radius: float, fraction: float = 0.8) -> np.ndarray:
+    maximum = float(np.linalg.norm(x, axis=1).max())
+    return x * (fraction * radius / maximum)
+
+
+def _gram_graphon(x: np.ndarray, radius: float) -> np.ndarray:
+    return x @ x.T / (2 * radius**2) + 0.5
+
+
+def run_claim6_empirical() -> dict:
+    """Stress the Gram-map and hom-density two-stage orbit architecture."""
+    rng = np.random.default_rng(SEED_C6)
+    radius = 2.0
+    gram_action_errors = []
+    readout_action_errors = []
+    lipschitz_ratios = []
+    recovery_errors = []
+    orthogonality_errors = []
+
+    for _ in range(1_000):
+        k = int(rng.integers(2, 6))
+        n = int(rng.integers(k + 1, 33))
+        x = _scale_cloud(rng.normal(size=(n, k)), radius)
+        q, _ = np.linalg.qr(rng.normal(size=(k, k)))
+        permutation = rng.permutation(n)
+        y = (x @ q)[permutation]
+        wx = _gram_graphon(x, radius)
+        wy = _gram_graphon(y, radius)
+        expected = wx[np.ix_(permutation, permutation)]
+        gram_action_errors.append(float(np.max(np.abs(wy - expected))))
+        features_x = np.array(list(_motif_densities(wx).values()))
+        features_y = np.array(list(_motif_densities(wy).values()))
+        readout_action_errors.append(float(np.max(np.abs(features_x - features_y))))
+
+        z = _scale_cloud(rng.normal(size=(n, k)), radius)
+        wz = _gram_graphon(z, radius)
+        delta2 = float(np.linalg.norm(wx - wz) / n)
+        dbar = float(np.linalg.norm(x - z) / math.sqrt(n))
+        lipschitz_ratios.append(delta2 / dbar)
+
+    for _ in range(512):
+        k = int(rng.integers(2, 6))
+        n = int(rng.integers(k + 2, 40))
+        x = _scale_cloud(rng.normal(size=(n, k)), radius, fraction=0.65)
+        q, _ = np.linalg.qr(rng.normal(size=(k, k)))
+        y = x @ q
+        recovered = np.linalg.pinv(x) @ y
+        recovery_errors.append(float(np.max(np.abs(x @ recovered - y))))
+        orthogonality_errors.append(
+            float(np.max(np.abs(recovered.T @ recovered - np.eye(k))))
+        )
+
+    # Non-orthogonal shear is outside the orbit and must alter both the Gram
+    # kernel and at least one homomorphism-density readout.
+    x_control = _scale_cloud(rng.normal(size=(24, 3)), radius, fraction=0.45)
+    shear = np.array([[1.0, 0.24, 0.0], [0.0, 0.93, 0.18], [0.0, 0.0, 1.08]])
+    y_control = x_control @ shear
+    wx_control = _gram_graphon(x_control, radius)
+    wy_control = _gram_graphon(y_control, radius)
+    control_gram_gap = float(np.max(np.abs(wx_control - wy_control)))
+    control_features_x = np.array(list(_motif_densities(wx_control).values()))
+    control_features_y = np.array(list(_motif_densities(wy_control).values()))
+    control_readout_gap = float(np.max(np.abs(control_features_x - control_features_y)))
+    control_orthogonality_gap = float(np.max(np.abs(shear.T @ shear - np.eye(3))))
+
+    checker = _run_independent_checker("claim6")
+    passed = (
+        max(gram_action_errors) < 2e-15
+        and max(readout_action_errors) < 2e-15
+        and max(lipschitz_ratios) <= 1 / radius + 1e-12
+        and max(recovery_errors) < 2e-14
+        and max(orthogonality_errors) < 2e-13
+        and control_gram_gap > 1e-3
+        and control_readout_gap > 1e-5
+        and control_orthogonality_gap > 0.1
+        and checker["passed"]
+    )
+    return {
+        "status": "VERIFIED",
+        "claim_scope": (
+            "Direct Gram-map orthogonal/permutation invariance, Lipschitz behavior, "
+            "orbit completeness recovery, and invariant hom-density readout."
+        ),
+        "seed": SEED_C6,
+        "radius": radius,
+        "group_action_trials": len(gram_action_errors),
+        "max_gram_action_error": max(gram_action_errors),
+        "max_two_stage_readout_action_error": max(readout_action_errors),
+        "lipschitz_trials": len(lipschitz_ratios),
+        "max_lipschitz_ratio": max(lipschitz_ratios),
+        "theorem_lipschitz_bound": 1 / radius,
+        "completeness_recovery_trials": len(recovery_errors),
+        "max_recovery_error": max(recovery_errors),
+        "max_recovered_orthogonality_error": max(orthogonality_errors),
+        "nonorthogonal_shear_control": {
+            "orthogonality_gap": control_orthogonality_gap,
+            "gram_gap": control_gram_gap,
+            "hom_density_readout_gap": control_readout_gap,
+        },
+        "independent_checker": checker,
+        "limitations": (
+            "The finite stress test targets the two-stage architecture's exact "
+            "invariance and orbit-detection mechanisms over varied dimensions."
         ),
         "check_passed": bool(passed),
     }
