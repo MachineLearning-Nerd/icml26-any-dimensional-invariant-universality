@@ -1,6 +1,7 @@
 {
   "backend": "hf",
   "flavor": "cpu-upgrade",
+  "image": "ghcr.io/astral-sh/uv:python3.12-bookworm-slim",
   "gpu_allowed": false,
   "estimated_algorithm_cores": 1,
   "enforced_math_threads": 1,
