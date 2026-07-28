@@ -1,4 +1,14 @@
-# Claim 3 method
+# Claim 3 method — current direct route
+
+The primary retry verifier directly executes Equation 5:
+
+1. evaluates the independently known Basel limit through 2,000,000 terms;
+2. runs 2,048 permutation/zero-padding invariance trials;
+3. runs 1,024 `ell_1` continuity trials against the analytic Lipschitz bound;
+4. removes the norm weight in two destructive controls, both of which diverge;
+5. calls a separately implemented checker.
+
+The earlier implication certificate remains a secondary arbitrary-`p` audit.
 
 The verifier follows the theorem's implication chain instead of fitting one
 target. It:
@@ -20,4 +30,4 @@ the Equation 5 `ell_p` weight on the paper's divergent witness, and double the
 permitted inner UAT error.
 
 Fixed command: `uv run --frozen python repro/src/verify.py`.
-Deterministic seeds: baseline `7`; Claim 3 certificate `260523156`.
+Deterministic seeds: direct route `260523159`; certificate `260523156`.

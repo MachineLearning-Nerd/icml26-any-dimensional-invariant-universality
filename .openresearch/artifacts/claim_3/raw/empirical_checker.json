@@ -1,0 +1,13 @@
+{
+  "command": "/repo/.venv/bin/python repro/src/checkers/positive_empirical_independent.py claim3",
+  "exit_code": 0,
+  "result": {
+    "basel_absolute_error": 9.99999499873283e-07,
+    "basel_n": 1000000,
+    "claim": "claim3",
+    "dropped_weight_growth": 64.0,
+    "passed": true,
+    "permutation_error": 0.0
+  },
+  "passed": true
+}

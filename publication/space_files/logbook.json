@@ -10,7 +10,7 @@
     "icml2026-repro",
     "paper-wRVTDcEMv8"
   ],
-  "updated_at": "2026-07-28T18:30:00+05:30",
+  "updated_at": "2026-07-29T12:00:00+05:30",
   "root": {
     "slug": "index",
     "title": "Any-Dimensional Invariant Universality — current reproduction",
@@ -19,7 +19,7 @@
       {
         "slug": "current-summary",
         "title": "Current verification and score forecast",
-        "file": "pages/current-summary/page.md",
+        "file": "pages/retry-summary/page.md",
         "children": []
       },
       {
@@ -36,38 +36,44 @@
       },
       {
         "slug": "claim-3",
-        "title": "Claim 3 — Equation 5 certificate",
-        "file": "pages/claim-3/page.md",
+        "title": "Claim 3 — current Eq. 5 direct verification",
+        "file": "pages/retry-claim-3/page.md",
         "children": []
       },
       {
         "slug": "claim-4",
-        "title": "Claim 4 — Equation 6 certificate",
-        "file": "pages/claim-4/page.md",
+        "title": "Claim 4 — current Eq. 6 direct verification",
+        "file": "pages/retry-claim-4/page.md",
         "children": []
       },
       {
         "slug": "claim-5",
-        "title": "Claim 5 — graphon-basis certificate",
-        "file": "pages/claim-5/page.md",
+        "title": "Claim 5 — current graphon-basis verification",
+        "file": "pages/retry-claim-5/page.md",
         "children": []
       },
       {
         "slug": "claim-6",
-        "title": "Claim 6 — Gram map",
-        "file": "pages/claim-6/page.md",
+        "title": "Claim 6 — current two-stage orbit verification",
+        "file": "pages/retry-claim-6/page.md",
         "children": []
       },
       {
         "slug": "reproduce",
         "title": "Reproduce and inspect",
-        "file": "pages/reproduce/page.md",
+        "file": "pages/retry-reproduce/page.md",
+        "children": []
+      },
+      {
+        "slug": "runner-source",
+        "title": "Complete current runner source",
+        "file": "pages/runner-source/page.md",
         "children": []
       },
       {
         "slug": "visibility-matrix",
         "title": "Evaluator visibility matrix",
-        "file": "pages/visibility-matrix/page.md",
+        "file": "pages/retry-visibility-matrix/page.md",
         "children": []
       },
       {
@@ -84,6 +90,6 @@
       }
     ]
   },
-  "agent_view_tokens": 10000,
-  "revision": "current-candidate-20260728"
+  "agent_view_tokens": 20000,
+  "revision": "8-of-12-retry-candidate-20260729"
 }

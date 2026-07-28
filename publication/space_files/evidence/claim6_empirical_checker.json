@@ -1,0 +1,12 @@
+{
+  "command": "/repo/.venv/bin/python repro/src/checkers/positive_empirical_independent.py claim6",
+  "exit_code": 0,
+  "result": {
+    "claim": "claim6",
+    "gram_invariance_error": 5.551115123125783e-17,
+    "nonorthogonal_shear_gram_gap": 0.0645,
+    "passed": true,
+    "recovered_orthogonality_error": 8.881784197001252e-16
+  },
+  "passed": true
+}

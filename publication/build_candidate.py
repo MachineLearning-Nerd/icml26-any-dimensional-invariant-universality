@@ -8,6 +8,7 @@ archived under historical/judged-revision/.
 from __future__ import annotations
 
 import argparse
+import ast
 import hashlib
 import json
 from pathlib import Path
@@ -15,8 +16,14 @@ import shutil
 import subprocess
 
 
-PROTECTED_REVISION = "ad3feb1493175f9af2a232174cd89d3a2688bd6b"
-MODIFIED_HISTORICAL_PATHS = ("README.md", "logbook.json", "pages/index.md")
+PROTECTED_REVISION = "b0dc5a7f233057ffdd81b477589074950001898e"
+MODIFIED_HISTORICAL_PATHS = (
+    "README.md",
+    "logbook.json",
+    "pages/index.md",
+    "repro/src/verify.py",
+)
+ARCHIVE_ROOT = "historical/judged-8-of-12"
 SOURCE_PATHS = (
     "pyproject.toml",
     "uv.lock",
@@ -28,11 +35,14 @@ SOURCE_PATHS = (
     "repro/src/checkers/claim3_independent.py",
     "repro/src/checkers/claim4_independent.py",
     "repro/src/checkers/claim5_independent.py",
+    "repro/src/checkers/positive_empirical_independent.py",
+    "repro/src/empirical_positive.py",
 )
 CONTRACTS = {
     ".openresearch/artifacts/claim_3/claim_contract.json": "evidence/claim3_contract.json",
     ".openresearch/artifacts/claim_4/claim_contract.json": "evidence/claim4_contract.json",
     ".openresearch/artifacts/claim_5/claim_contract.json": "evidence/claim5_contract.json",
+    ".openresearch/artifacts/claim_6/claim_contract.json": "evidence/claim6_contract.json",
 }
 
 
@@ -59,6 +69,38 @@ def copy_text(source: Path, destination: Path) -> None:
     shutil.copy2(source, destination)
 
 
+def function_source(path: Path, function_name: str) -> str:
+    source = path.read_text()
+    tree = ast.parse(source)
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == function_name:
+            lines = source.splitlines()
+            return "\n".join(lines[node.lineno - 1 : node.end_lineno])
+    raise ValueError(f"function {function_name} not found in {path}")
+
+
+def inject_visible_source(repo: Path, out: Path) -> None:
+    empirical_path = repo / "repro/src/empirical_positive.py"
+    checker_path = repo / "repro/src/checkers/positive_empirical_independent.py"
+    replacements = {
+        "{{CLAIM3_SOURCE}}": function_source(empirical_path, "run_claim3_empirical"),
+        "{{CLAIM4_SOURCE}}": function_source(empirical_path, "run_claim4_empirical"),
+        "{{CLAIM5_SOURCE}}": function_source(empirical_path, "run_claim5_empirical"),
+        "{{CLAIM6_SOURCE}}": function_source(empirical_path, "run_claim6_empirical"),
+        "{{EMPIRICAL_SOURCE}}": empirical_path.read_text().rstrip(),
+        "{{INDEPENDENT_CHECKER_SOURCE}}": checker_path.read_text().rstrip(),
+    }
+    for page in out.rglob("*.md"):
+        text = page.read_text()
+        changed = False
+        for marker, source in replacements.items():
+            if marker in text:
+                text = text.replace(marker, source)
+                changed = True
+        if changed:
+            page.write_text(text)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--judged", type=Path, required=True)
@@ -77,7 +119,7 @@ def main() -> int:
     archived = {}
     for relative in MODIFIED_HISTORICAL_PATHS:
         source = judged / relative
-        destination = out / "historical" / "judged-revision" / relative
+        destination = out / ARCHIVE_ROOT / relative
         copy_text(source, destination)
         archived[relative] = sha256(destination)
 
@@ -89,9 +131,12 @@ def main() -> int:
         copy_text(repo / relative, out / relative)
     for source_relative, destination_relative in CONTRACTS.items():
         copy_text(repo / source_relative, out / destination_relative)
+    inject_visible_source(repo, out)
 
     original_manifest = {}
-    manifest_path = repo / ".openresearch" / "protected" / "judged_space_manifest.sha256"
+    manifest_path = (
+        repo / ".openresearch" / "protected" / "judged_8_of_12_space_manifest.sha256"
+    )
     for line in manifest_path.read_text().splitlines():
         digest, relative = line.split(maxsplit=1)
         original_manifest[relative.removeprefix("./")] = digest
@@ -117,13 +162,25 @@ def main() -> int:
         "modified_originals_archived_byte_exact": not archive_mismatches,
         "archive_mismatches": archive_mismatches,
         "unchanged_historical_pages": {
-            "pages/verify/page.md": sha256(out / "pages/verify/page.md") == original_manifest["pages/verify/page.md"],
-            "pages/overview/page.md": sha256(out / "pages/overview/page.md") == original_manifest["pages/overview/page.md"],
+            relative: sha256(out / relative) == original_manifest[relative]
+            for relative in (
+                "pages/claim-1/page.md",
+                "pages/claim-2/page.md",
+                "pages/claim-3/page.md",
+                "pages/claim-4/page.md",
+                "pages/claim-5/page.md",
+                "pages/claim-6/page.md",
+                "pages/current-summary/page.md",
+                "pages/reproduce/page.md",
+                "pages/visibility-matrix/page.md",
+                "pages/verify/page.md",
+                "pages/overview/page.md",
+            )
         },
     }
     release = out / "release"
     release.mkdir(parents=True, exist_ok=True)
-    (release / "subset_check.json").write_text(json.dumps(subset, indent=2) + "\n")
+    (release / "retry_subset_check.json").write_text(json.dumps(subset, indent=2) + "\n")
     if missing or archive_mismatches:
         raise SystemExit("protected subset/archive check failed")
 
@@ -141,16 +198,18 @@ def main() -> int:
         )
         and str(path.relative_to(out)) not in {"pages/verify/page.md", "pages/overview/page.md"}
     )
-    allowlist = release / "upload_allowlist.txt"
-    if "release/upload_allowlist.txt" not in candidate_paths:
-        candidate_paths.append("release/upload_allowlist.txt")
-    if "release/upload_manifest.sha256" not in candidate_paths:
-        candidate_paths.append("release/upload_manifest.sha256")
+    allowlist = release / "retry_upload_allowlist.txt"
+    if "release/retry_upload_allowlist.txt" not in candidate_paths:
+        candidate_paths.append("release/retry_upload_allowlist.txt")
+    if "release/retry_upload_manifest.sha256" not in candidate_paths:
+        candidate_paths.append("release/retry_upload_manifest.sha256")
     candidate_paths = sorted(candidate_paths)
     allowlist.write_text("\n".join(candidate_paths) + "\n")
 
-    manifest = release / "upload_manifest.sha256"
-    hashable = [path for path in candidate_paths if path != "release/upload_manifest.sha256"]
+    manifest = release / "retry_upload_manifest.sha256"
+    hashable = [
+        path for path in candidate_paths if path != "release/retry_upload_manifest.sha256"
+    ]
     manifest.write_text(
         "".join(f"{sha256(out / relative)}  {relative}\n" for relative in hashable)
     )

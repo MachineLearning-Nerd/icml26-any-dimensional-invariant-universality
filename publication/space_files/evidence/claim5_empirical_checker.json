@@ -1,0 +1,12 @@
+{
+  "command": "/repo/.venv/bin/python repro/src/checkers/positive_empirical_independent.py claim5",
+  "exit_code": 0,
+  "result": {
+    "claim": "claim5",
+    "passed": true,
+    "same_edge_gap": 0.0,
+    "tight_edge_cut_ratio": 1.0000000000000004,
+    "triangle_gap": 0.09375
+  },
+  "passed": true
+}

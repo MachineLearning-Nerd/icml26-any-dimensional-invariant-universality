@@ -1,6 +1,13 @@
-# Claim 4 method
+# Claim 4 method — current direct route
 
-The certificate reconstructs the entire implication chain:
+The primary retry verifier runs 4,096 pairs of empirical one-dimensional
+measures with exact `W1`, testing the Kantorovich–Rubinstein bound for
+`rho=tanh`; 2,048 permutation trials; an equal-mean separation control; and a
+destructive quadratic-growth sequence whose `W1` vanishes while its invalid
+integral stays one. A separately implemented checker recomputes all key
+directions.
+
+The earlier certificate remains a secondary implication-chain audit:
 
 1. the `W_p` convergence characterization proves continuity for every
    continuous `p`-growth integrand;

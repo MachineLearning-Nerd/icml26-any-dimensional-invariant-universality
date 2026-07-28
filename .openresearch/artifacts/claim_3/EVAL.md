@@ -6,12 +6,14 @@ Run:
 uv run --frozen python repro/src/verify.py
 ```
 
-The command must exit zero, print `CLAIM 3 INDEPENDENT CHECKER`, label Claim 3
-`VERIFIED`, and finish with `CUMULATIVE REGRESSION PASS`. Inspect:
+The command must exit zero, print the direct Claim 3 checker result, label
+Claim 3 `VERIFIED`, and finish with `CUMULATIVE REGRESSION PASS`. Inspect the
+`primary_empirical_verification` object in `outputs/verdict.json`; require:
 
-- `raw/claim3_certificate.json`
-- `raw/independent_checker.json`
-- the baseline `outputs/verdict.json`
+- 2,000,000-term absolute error below `5.1e-7`;
+- 2,048 invariance trials below `2e-13`;
+- 1,024 continuity trials within the analytic bound;
+- both dropped-weight controls to diverge;
+- the independent direct checker to exit zero.
 
-Mutation controls are successful only when the wrong product constructor,
-unweighted divergent aggregate, and excessive inner error are rejected.
+The older certificate outputs remain supporting evidence.

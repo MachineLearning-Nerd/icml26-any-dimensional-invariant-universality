@@ -1,0 +1,31 @@
+{
+  "claim_id": 6,
+  "paper": "arXiv:2605.23156v1",
+  "statement": "The normalized Gram graphon map is Lipschitz on radius-R point clouds, determines orthogonal/permutation orbits, and combined with invariant graphon readouts yields universality on bounded point-cloud orbit space.",
+  "anchors": [
+    "Equation 12",
+    "Equation 14",
+    "Theorem 4.12",
+    "Theorem 4.13",
+    "Appendix E"
+  ],
+  "assumptions": [
+    "every point has Euclidean norm at most R",
+    "the group acts by a common orthogonal transform and point permutation",
+    "the normalized Gram kernel is used exactly as in Equation 12",
+    "the graphon readout is invariant to measure-preserving relabeling"
+  ],
+  "acceptance": [
+    "the Gram action is invariant in at least 1000 varied trials",
+    "the five-coordinate two-stage readout is invariant in the same trials",
+    "the Lipschitz ratio stays below 1/R in at least 1000 trials",
+    "full-rank same-Gram orbits recover an orthogonal transform in at least 512 trials",
+    "a nonorthogonal shear changes both Gram and readout",
+    "an independent checker exits zero"
+  ],
+  "verdict_values": [
+    "VERIFIED",
+    "FALSIFIED",
+    "BLOCKED"
+  ]
+}

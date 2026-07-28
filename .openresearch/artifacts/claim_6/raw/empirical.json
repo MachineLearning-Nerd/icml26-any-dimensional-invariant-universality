@@ -1,0 +1,34 @@
+{
+  "status": "VERIFIED",
+  "claim_scope": "Direct Gram-map orthogonal/permutation invariance, Lipschitz behavior, orbit completeness recovery, and invariant hom-density readout.",
+  "seed": 260523162,
+  "radius": 2.0,
+  "group_action_trials": 1000,
+  "max_gram_action_error": 4.440892098500626e-16,
+  "max_two_stage_readout_action_error": 1.4432899320127035e-15,
+  "lipschitz_trials": 1000,
+  "max_lipschitz_ratio": 0.1785166662587531,
+  "theorem_lipschitz_bound": 0.5,
+  "completeness_recovery_trials": 512,
+  "max_recovery_error": 6.7307270867900115e-15,
+  "max_recovered_orthogonality_error": 1.0308742940399845e-14,
+  "nonorthogonal_shear_control": {
+    "orthogonality_gap": 0.24,
+    "gram_gap": 0.02151736147430766,
+    "hom_density_readout_gap": 0.00024000415865610414
+  },
+  "independent_checker": {
+    "command": "/repo/.venv/bin/python repro/src/checkers/positive_empirical_independent.py claim6",
+    "exit_code": 0,
+    "result": {
+      "claim": "claim6",
+      "gram_invariance_error": 5.551115123125783e-17,
+      "nonorthogonal_shear_gram_gap": 0.0645,
+      "passed": true,
+      "recovered_orthogonality_error": 8.881784197001252e-16
+    },
+    "passed": true
+  },
+  "limitations": "The finite stress test targets the two-stage architecture's exact invariance and orbit-detection mechanisms over varied dimensions.",
+  "check_passed": true
+}
