@@ -31,6 +31,6 @@ Fixed reproduction command:
 uv run --frozen python repro/src/verify.py
 ```
 
-Winning evidence commit: `8e6d43cd67ef70ba8511358b84b3d856853a7f65`.
+Winning evidence commit: `e321e51474c37db0cce0e7eb4b5155ad49477997`.
 Hugging Face backend: `cpu-upgrade`; 64 logical CPUs visible, one math thread
-enforced; cumulative verifier runtime 11.082165 s.
+enforced; cumulative verifier runtime 12.227845 s.

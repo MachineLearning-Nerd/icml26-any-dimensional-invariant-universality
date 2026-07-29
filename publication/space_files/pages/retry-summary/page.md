@@ -26,9 +26,9 @@ ingredient or assumption is removed.
 
 - Raw cumulative result: [evidence/retry_cumulative_result.json](evidence/retry_cumulative_result.json)
 - Fixed command: `uv run --frozen python repro/src/verify.py`
-- Winning evidence commit: `8e6d43cd67ef70ba8511358b84b3d856853a7f65`
+- Winning evidence commit: `e321e51474c37db0cce0e7eb4b5155ad49477997`
 - Formal run: Hugging Face `cpu-upgrade`, 64 logical CPUs allocated, one math
-  thread enforced, 11.082165 s program runtime, 32 s total job duration
+  thread enforced, 12.227845 s program runtime, 37 s total job duration
 - Seeds: `7`, `260523159`, `260523160`, `260523161`, `260523162`
 
 The live score remains **8/12** until a new evaluator records a verdict.

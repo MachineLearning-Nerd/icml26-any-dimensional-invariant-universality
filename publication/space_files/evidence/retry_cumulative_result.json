@@ -3,7 +3,7 @@
   "paper": "arXiv:2605.23156",
   "judge_space_revision": "b0dc5a7f233057ffdd81b477589074950001898e",
   "live_judged_score": "8/12",
-  "git_sha": "8e6d43cd67ef70ba8511358b84b3d856853a7f65",
+  "git_sha": "e321e51474c37db0cce0e7eb4b5155ad49477997",
   "seed": 7,
   "python": "3.12.12 (main, Feb  3 2026, 03:12:00) [GCC 12.2.0]",
   "platform": "Linux-6.12.90-120.164.amzn2023.x86_64-x86_64-with-glibc2.36",
@@ -31,7 +31,7 @@
       "architecture": "Haswell"
     }
   ],
-  "runtime_seconds": 11.082164776977152,
+  "runtime_seconds": 12.227845285786316,
   "claims": {
     "claim_1_deepsets_divergence": {
       "status": "VERIFIED",

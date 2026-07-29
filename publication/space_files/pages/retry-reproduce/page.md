@@ -19,7 +19,7 @@ contract or destructive control fails.
 - [pyproject.toml](pyproject.toml)
 - [uv.lock](uv.lock)
 
-Git commit: `8e6d43cd67ef70ba8511358b84b3d856853a7f65`
+Git commit: `e321e51474c37db0cce0e7eb4b5155ad49477997`
 
 ## Raw evidence
 
@@ -31,10 +31,10 @@ Git commit: `8e6d43cd67ef70ba8511358b84b3d856853a7f65`
 
 ## Compute and provenance
 
-Formal run `c68cbf81-62df-4541-b09b-29208f32540d` used Hugging Face
+Formal run `0881b838-e36f-4959-b7ab-78183437f876` used Hugging Face
 `cpu-upgrade`, never GPU. Estimate: one algorithmic core. Actual allocation:
 64 logical CPUs visible; both OpenBLAS pools enforced one thread. Program
-runtime: 11.082165 s; total job duration: 32 s.
+runtime: 12.227845 s; total job duration: 37 s.
 
 Seeds: `7`, `260523159`, `260523160`, `260523161`, `260523162`.
 

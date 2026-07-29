@@ -113,10 +113,58 @@ def main() -> int:
         if token not in runner_source:
             unresolved.append(f"complete runner source missing {token}")
     for claim in range(3, 7):
+        key = {
+            3: "claim_3_eq5_universality",
+            4: "claim_4_eq6_universality",
+            5: "claim_5_graphon_basis",
+            6: "claim_6_gram_map",
+        }[claim]
+        direct_path = root / f"evidence/claim{claim}_empirical.json"
+        checker_path = root / f"evidence/claim{claim}_empirical_checker.json"
         for suffix in ("empirical.json", "empirical_checker.json"):
             relative = f"evidence/claim{claim}_{suffix}"
             if not (root / relative).is_file():
                 unresolved.append(f"missing raw retry evidence {relative}")
+        if direct_path.is_file() and checker_path.is_file():
+            direct = json.loads(direct_path.read_text())
+            checker = json.loads(checker_path.read_text())
+            cumulative = json.loads(
+                (root / "evidence/retry_cumulative_result.json").read_text()
+            )
+            expected = cumulative["claims"][key]["primary_empirical_verification"]
+            if direct != expected:
+                unresolved.append(f"Claim {claim} direct JSON differs from cumulative result")
+            if checker != expected["independent_checker"]:
+                unresolved.append(f"Claim {claim} checker JSON differs from cumulative result")
+            if not direct["check_passed"] or not checker["passed"] or checker["exit_code"] != 0:
+                unresolved.append(f"Claim {claim} direct/checker evidence did not pass")
+
+    headline_tokens = {
+        "pages/retry-claim-3/page.md": ("4.999999e-7", "0.412692", "13.703"),
+        "pages/retry-claim-4/page.md": ("0.760925", "1.554312e-15", "0.0001"),
+        "pages/retry-claim-5/page.md": ("1.074112", "0.09375", "6.938894e-16"),
+        "pages/retry-claim-6/page.md": ("0.178517", "6.730727e-15", "0.000240004"),
+    }
+    for relative, tokens in headline_tokens.items():
+        text = (root / relative).read_text()
+        for token in tokens:
+            if token not in text:
+                unresolved.append(f"{relative}: displayed result missing {token}")
+
+    allowlist_path = root / "release/retry_upload_allowlist.txt"
+    manifest_path = root / "release/retry_upload_manifest.sha256"
+    allowlist = [line for line in allowlist_path.read_text().splitlines() if line]
+    allowed_suffixes = {".md", ".json", ".py", ".toml", ".lock", ".txt", ".sha256"}
+    for relative in allowlist:
+        path = root / relative
+        if not path.is_file():
+            unresolved.append(f"allowlisted path missing: {relative}")
+        if path.suffix.lower() not in allowed_suffixes:
+            unresolved.append(f"non-text path in allowlist: {relative}")
+    for line in manifest_path.read_text().splitlines():
+        digest, relative = line.split(maxsplit=1)
+        if sha256(root / relative) != digest:
+            unresolved.append(f"manifest hash mismatch: {relative}")
 
     report = {
         "pass": args.pass_name,

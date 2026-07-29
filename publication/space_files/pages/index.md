@@ -36,4 +36,4 @@ audit history, not the current verifier.
 | [Old overview](#/overview) | **Historical rejected baseline** |
 
 Current evidence supersedes those pages at Git commit
-`8e6d43cd67ef70ba8511358b84b3d856853a7f65`.
+`e321e51474c37db0cce0e7eb4b5155ad49477997`.
