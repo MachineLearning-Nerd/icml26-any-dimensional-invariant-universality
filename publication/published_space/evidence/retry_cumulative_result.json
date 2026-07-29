@@ -1,0 +1,1217 @@
+{
+  "artifact_kind": "complete_six_claim_cumulative_reproduction",
+  "paper": "arXiv:2605.23156",
+  "judge_space_revision": "b0dc5a7f233057ffdd81b477589074950001898e",
+  "live_judged_score": "8/12",
+  "git_sha": "e321e51474c37db0cce0e7eb4b5155ad49477997",
+  "seed": 7,
+  "python": "3.12.12 (main, Feb  3 2026, 03:12:00) [GCC 12.2.0]",
+  "platform": "Linux-6.12.90-120.164.amzn2023.x86_64-x86_64-with-glibc2.36",
+  "available_logical_cpus": 64,
+  "enforced_math_threads": 1,
+  "threadpools": [
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "filepath": "/repo/.venv/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-32a4b2a6.so",
+      "version": "0.3.31.188.0",
+      "threading_layer": "pthreads",
+      "architecture": "Haswell"
+    },
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "filepath": "/repo/.venv/lib/python3.12/site-packages/scipy.libs/libscipy_openblas-6cdc3b4a.so",
+      "version": "0.3.30",
+      "threading_layer": "pthreads",
+      "architecture": "Haswell"
+    }
+  ],
+  "runtime_seconds": 12.227845285786316,
+  "claims": {
+    "claim_1_deepsets_divergence": {
+      "status": "VERIFIED",
+      "check_passed": true,
+      "original_sum_by_n": {
+        "200": 42.87816080056619,
+        "800": 103.33479829735921,
+        "3200": 247.17526522203073,
+        "12800": 589.3169534068679
+      },
+      "modified_sum_by_n": {
+        "200": 1.768843958885639,
+        "800": 1.7766083669766746,
+        "3200": 1.7789217322447233,
+        "12800": 1.7796098715332127
+      },
+      "growth_ratio": 13.74398860407945,
+      "analytic_ratio": 13.454342644059432,
+      "relative_tail_change": 0.006049591441240062,
+      "negative_control": "Eq. 5 reweight converges on the Eq. 4 divergent input."
+    },
+    "claim_2_cut_nonlinearity": {
+      "status": "VERIFIED",
+      "check_passed": true,
+      "spike_graphons": [
+        {
+          "n": 4,
+          "cut_norm_w": 0.25,
+          "cut_norm_w_squared": 1.0,
+          "cut_norm_3w": 0.75
+        },
+        {
+          "n": 6,
+          "cut_norm_w": 0.16666666666666666,
+          "cut_norm_w_squared": 1.0,
+          "cut_norm_3w": 0.5
+        },
+        {
+          "n": 8,
+          "cut_norm_w": 0.125,
+          "cut_norm_w_squared": 1.0,
+          "cut_norm_3w": 0.375
+        },
+        {
+          "n": 11,
+          "cut_norm_w": 0.09090909090909091,
+          "cut_norm_w_squared": 1.0,
+          "cut_norm_3w": 0.2727272727272727
+        },
+        {
+          "n": 14,
+          "cut_norm_w": 0.07142857142857142,
+          "cut_norm_w_squared": 1.0,
+          "cut_norm_3w": 0.21428571428571427
+        },
+        {
+          "n": 16,
+          "cut_norm_w": 0.0625,
+          "cut_norm_w_squared": 1.0,
+          "cut_norm_3w": 0.1875
+        }
+      ],
+      "negative_control": "Linear pointwise map tends to zero while t^2 remains at one."
+    },
+    "claim_3_eq5_universality": {
+      "claim": "Equation 5 is continuous on the ell_p quotient and universal on K/G_infinity for every compact K.",
+      "paper_anchors": [
+        "Equation 5",
+        "Theorem 4.2",
+        "Theorem 4.3",
+        "Appendix B.2-B.3"
+      ],
+      "quantifiers": {
+        "p": "every p in [1,infinity)",
+        "k": "every finite input dimension k",
+        "K": "every compact K subset ell_p(R^k)",
+        "activation": "every continuous non-polynomial activation phi",
+        "target": "every continuous real-valued function on K/G_infinity",
+        "accuracy": "every epsilon > 0"
+      },
+      "certificate_type": "machine-checkable implication certificate with declared external premises",
+      "proof_obligations": [
+        {
+          "id": "P1",
+          "statement": "K compact in ell_p implies bounded p-mass B and uniform p-tail decay.",
+          "kind": "external-premise",
+          "source": "Diestel, Sequences and Series in Banach Spaces; paper Proposition 4.1."
+        },
+        {
+          "id": "P2",
+          "statement": "A uniform limit of continuous maps is continuous.",
+          "kind": "external-premise",
+          "source": "Rudin, Principles of Mathematical Analysis; uniform limit theorem."
+        },
+        {
+          "id": "P3",
+          "statement": "A continuous non-polynomial activation has compact-set UAT.",
+          "kind": "external-premise",
+          "source": "Leshno et al. (1993), Neural Networks 6(6):861-867."
+        },
+        {
+          "id": "P4",
+          "statement": "A point-separating unital subalgebra is dense in C(K/G_infinity).",
+          "kind": "external-premise",
+          "source": "Real Stone-Weierstrass theorem; paper Proposition 3.4."
+        },
+        {
+          "id": "D1",
+          "statement": "Eq. 5 aggregate converges uniformly on K by ||tail|| <= M_rho times p-tail.",
+          "kind": "derived",
+          "depends_on": [
+            "P1",
+            "P2"
+          ]
+        },
+        {
+          "id": "D2",
+          "statement": "The continuous Eq. 5 class is a unital subalgebra via explicit outer constructors.",
+          "kind": "derived",
+          "depends_on": [
+            "D1"
+          ]
+        },
+        {
+          "id": "D3",
+          "statement": "Distinct quotient points have a differing nonzero multiplicity isolated by a continuous bump.",
+          "kind": "derived",
+          "depends_on": [
+            "P1"
+          ]
+        },
+        {
+          "id": "D4",
+          "statement": "The continuous Eq. 5 class is dense in C(K/G_infinity).",
+          "kind": "derived",
+          "depends_on": [
+            "D1",
+            "D2",
+            "D3",
+            "P4"
+          ]
+        },
+        {
+          "id": "D5",
+          "statement": "Neural rho and sigma approximate each continuous Eq. 5 map within epsilon.",
+          "kind": "derived",
+          "depends_on": [
+            "P1",
+            "P3"
+          ]
+        },
+        {
+          "id": "C",
+          "statement": "The Eq. 5 neural architecture is continuous and dense in C(K/G_infinity).",
+          "kind": "conclusion",
+          "depends_on": [
+            "D1",
+            "D4",
+            "D5"
+          ]
+        }
+      ],
+      "checks": {
+        "symbolic_constructors": {
+          "scalar_residual": "0",
+          "addition_residual": "0",
+          "product_residual": "0",
+          "mutated_product_residual": "-a_1**2*a_2**3 + a_1**2*a_2 + a_1**2 - 2*a_1*a_2**3 + 2*a_1*a_2 + 2*a_1 - 2*a_2**3 + 2*a_2 + 3",
+          "passed": true
+        },
+        "finite_constructor_regression": {
+          "instances": 128,
+          "max_scalar_constructor_error": 0.0,
+          "max_add_constructor_error": 0.0,
+          "max_product_constructor_error": 0.0,
+          "max_permutation_zero_padding_error": 4.440892098500626e-16,
+          "mutated_product_min_error": 0.02895849228885916,
+          "passed": true
+        },
+        "uniform_tail_continuity": {
+          "compact_family": "K={x in ell_2: |x_i| <= 2^-i}",
+          "truncation_indices": [
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "actual_tail_norms": [
+            0.005229913888642724,
+            2.0345384054424347e-05,
+            3.10440858282455e-10,
+            7.228014483236696e-20,
+            3.918314502740958e-39
+          ],
+          "certified_upper_bounds": [
+            0.00736569563735987,
+            2.8772248583436992e-05,
+            4.390296719884795e-10,
+            1.0221956111222494e-19,
+            5.541333511419453e-39
+          ],
+          "max_bound_ratio": 0.7100366545307475,
+          "unweighted_negative_control_growth": 13.703378161785412,
+          "passed": true
+        },
+        "constructive_separation": {
+          "finite_domain": "length-4 integer sequences over {-2,-1,0,1,2}, modulo permutation/zero padding",
+          "orbits": 70,
+          "distinct_orbit_pairs_exhausted": 2415,
+          "minimum_constructed_separation_gap": 1.0,
+          "passed": true
+        },
+        "uat_error_composition": {
+          "inner_error_budget": "delta / B, where B = sup_X sum_i ||X_i||^p = M^p",
+          "aggregate_error_bound": "delta",
+          "outer_uat_error_budget": "epsilon / 2 on the compact delta-neighborhood of the true aggregate image",
+          "outer_uniform_continuity_budget": "epsilon / 2 for aggregate perturbations <= delta",
+          "final_error_bound": "epsilon",
+          "mutated_inner_budget_bound": "2*delta",
+          "paper_gap_repaired": "The compact outer domain is the closed delta-neighborhood of the true aggregate image, so both true and approximated aggregates lie in the domain used for uniform continuity.",
+          "passed": true
+        }
+      },
+      "limitations": [
+        "Standard compactness, uniform-limit, UAT, and Stone-Weierstrass theorems are declared premises rather than formalized in a proof assistant.",
+        "Finite and randomized constructor checks are regression evidence; the universal conclusion comes from the implication certificate.",
+        "The certificate repairs the paper's outer-domain omission by using a compact delta-neighborhood."
+      ],
+      "internal_certificate_passed": true,
+      "independent_checker": {
+        "command": "/repo/.venv/bin/python repro/src/checkers/claim3_independent.py",
+        "exit_code": 0,
+        "passed": true
+      },
+      "check_passed": true,
+      "status": "VERIFIED",
+      "primary_empirical_verification": {
+        "status": "VERIFIED",
+        "claim_scope": "Direct Eq. 5 convergence, ell_1 continuity, permutation/zero-padding invariance, and destructive removal of the norm reweighting.",
+        "seed": 260523159,
+        "basel_convergence": [
+          {
+            "n": 10000,
+            "eq5_value": 1.6448340718480599,
+            "absolute_error_to_pi2_over_6": 9.999500016655283e-05
+          },
+          {
+            "n": 100000,
+            "eq5_value": 1.6449240668982266,
+            "absolute_error_to_pi2_over_6": 9.99994999983933e-06
+          },
+          {
+            "n": 1000000,
+            "eq5_value": 1.6449330668487263,
+            "absolute_error_to_pi2_over_6": 9.999995000953277e-07
+          },
+          {
+            "n": 2000000,
+            "eq5_value": 1.6449335668483513,
+            "absolute_error_to_pi2_over_6": 4.999998750587764e-07
+          }
+        ],
+        "basel_exact_limit": 1.6449340668482264,
+        "permutation_zero_padding_trials": 2048,
+        "max_permutation_zero_padding_error": 8.881784197001252e-15,
+        "continuity_trials": 1024,
+        "continuity_bound": "|tau(x)-tau(y)| <= 2 ||x-y||_1",
+        "max_fraction_of_continuity_bound": 0.41269177487740505,
+        "continuity_l1_range": [
+          1.6134423063835048e-07,
+          2.491109374217806
+        ],
+        "dropped_weight_constant_sum": {
+          "256": 256.0,
+          "1024": 1024.0,
+          "4096": 4096.0,
+          "16384": 16384.0
+        },
+        "slow_decay_destructive_control": [
+          {
+            "n": 256,
+            "unweighted_original": 50.19239681528715,
+            "eq5_weighted": 1.7709877248519226
+          },
+          {
+            "n": 1024,
+            "unweighted_original": 120.74188110445357,
+            "eq5_weighted": 1.7772477097205912
+          },
+          {
+            "n": 4096,
+            "unweighted_original": 288.5829463978107,
+            "eq5_weighted": 1.7791119587296649
+          },
+          {
+            "n": 16384,
+            "unweighted_original": 687.8053944062735,
+            "eq5_weighted": 1.7796664372670141
+          }
+        ],
+        "independent_checker": {
+          "command": "/repo/.venv/bin/python repro/src/checkers/positive_empirical_independent.py claim3",
+          "exit_code": 0,
+          "result": {
+            "basel_absolute_error": 9.99999499873283e-07,
+            "basel_n": 1000000,
+            "claim": "claim3",
+            "dropped_weight_growth": 64.0,
+            "passed": true,
+            "permutation_error": 0.0
+          },
+          "passed": true
+        },
+        "limitations": "The sweeps corroborate the exact continuity and invariance mechanisms; the accompanying constructive certificate separately audits point separation and the theorem's implication chain.",
+        "check_passed": true
+      },
+      "historical_toy_regression": {
+        "status": "TOY",
+        "check_passed": true,
+        "subalgebra_addition_constructor_error": 0.0,
+        "subalgebra_product_constructor_error": 0.0,
+        "separation_values": [
+          1.7000000000000002,
+          0.8500000000000001
+        ],
+        "random_feature_rmse": 4.944099509941879e-05,
+        "limitation": "Finite constructors and one target do not establish density on every compact K/G_infinity."
+      }
+    },
+    "claim_4_eq6_universality": {
+      "claim": "Equation 6 is W_p-continuous under p-growth and universal on every compact Q subset P_p(R^k).",
+      "paper_anchors": [
+        "Equation 6",
+        "Theorem 4.5",
+        "Theorem 4.6",
+        "Appendix B.4-B.5"
+      ],
+      "quantifiers": {
+        "p": "every p in [1,infinity)",
+        "k": "every finite k",
+        "Q": "every compact Q subset P_p(R^k)",
+        "activation": "every Lipschitz continuous, nonpolynomial, asymptotically-polynomial activation",
+        "target": "every continuous real-valued function on Q",
+        "accuracy": "every epsilon > 0"
+      },
+      "certificate_type": "machine-checkable implication certificate with declared external premises",
+      "proof_obligations": [
+        {
+          "id": "P1",
+          "kind": "external-premise",
+          "statement": "W_p convergence is equivalent to convergence of integrals of continuous p-growth test functions.",
+          "source": "Villani, Optimal Transport: Old and New (2008)."
+        },
+        {
+          "id": "P2",
+          "kind": "external-premise",
+          "statement": "Compact Q in P_p is tight and p-uniformly integrable.",
+          "source": "Ambrosio, Gigli, Savare (2005); paper Proposition 4.4."
+        },
+        {
+          "id": "P3",
+          "kind": "external-premise",
+          "statement": "Continuous nonpolynomial asymptotically-polynomial activations uniformly approximate C_0(R^k).",
+          "source": "van Nuland (2024), Neural Networks 173, 106181; arXiv:2308.03812v2."
+        },
+        {
+          "id": "P4",
+          "kind": "external-premise",
+          "statement": "Distinct Borel probability measures are separated by bounded continuous functions.",
+          "source": "Regularity plus Urysohn lemma on R^k."
+        },
+        {
+          "id": "P5",
+          "kind": "external-premise",
+          "statement": "A point-separating unital subalgebra is dense in C(Q).",
+          "source": "Real Stone-Weierstrass theorem."
+        },
+        {
+          "id": "D1",
+          "kind": "derived",
+          "depends_on": [
+            "P1"
+          ],
+          "statement": "mu -> integral rho dmu and Equation 6 are W_p-continuous under p-growth."
+        },
+        {
+          "id": "D2",
+          "kind": "derived",
+          "depends_on": [
+            "D1"
+          ],
+          "statement": "Explicit concatenation and outer maps form a unital subalgebra."
+        },
+        {
+          "id": "D3",
+          "kind": "derived",
+          "depends_on": [
+            "P4"
+          ],
+          "statement": "Bounded continuous bump integrals separate every distinct measure pair."
+        },
+        {
+          "id": "D4",
+          "kind": "derived",
+          "depends_on": [
+            "D1",
+            "D2",
+            "D3",
+            "P5"
+          ],
+          "statement": "The continuous Equation 6 class is dense in C(Q)."
+        },
+        {
+          "id": "D5",
+          "kind": "derived",
+          "depends_on": [
+            "P2",
+            "P3"
+          ],
+          "statement": "Tail truncation plus global C_0 UAT approximates rho in integral uniformly over Q."
+        },
+        {
+          "id": "C",
+          "kind": "conclusion",
+          "depends_on": [
+            "D1",
+            "D4",
+            "D5"
+          ],
+          "statement": "The Equation 6 neural family is continuous and dense in C(Q)."
+        }
+      ],
+      "checks": {
+        "activation_assumptions": {
+          "witness_activation": "leaky ReLU phi(t)=max(t,0)+0.1 min(t,0)",
+          "lipschitz_constant": 1.0,
+          "nonpolynomial": true,
+          "asymptotic_polynomials": {
+            "minus_infinity": "0.1 t",
+            "plus_infinity": "t"
+          },
+          "scope_warning": "The paper lists ReLU, Softplus, and Sigmoid as examples, but its literal ratio-to-polynomial definition is ambiguous when an activation tends to zero at one end. The certificate uses leaky ReLU, which unambiguously satisfies the written assumptions.",
+          "passed": true
+        },
+        "symbolic_subalgebra": {
+          "constructor_residuals": {
+            "scalar": "0",
+            "addition": "0",
+            "product": "0"
+          },
+          "mutated_product_residual": "-a**2*b**3 - a**2*b + a**2 + 3*a*b**3 + 3*a*b - 3*a - b**3 - b + 2",
+          "growth_closure": "Concatenating rho_1 and rho_2 preserves the componentwise bound |rho_j(x)| <= M_j(1+||x||^p).",
+          "passed": true
+        },
+        "wasserstein_continuity": {
+          "atomic_pairs": 256,
+          "test_function": "rho(x)=tanh(x), Lipschitz constant 1",
+          "max_Kantorovich_Rubinstein_ratio": 0.7972251748726317,
+          "growth_violation_control": [
+            {
+              "n": 4,
+              "W2_to_delta0": 0.5,
+              "log_exp_integral_lower_bound": -0.1588830833596715
+            },
+            {
+              "n": 8,
+              "W2_to_delta0": 0.3535533905932738,
+              "log_exp_integral_lower_bound": 1.7616753749604932
+            },
+            {
+              "n": 16,
+              "W2_to_delta0": 0.25,
+              "log_exp_integral_lower_bound": 7.682233833280657
+            },
+            {
+              "n": 32,
+              "W2_to_delta0": 0.1767766952966369,
+              "log_exp_integral_lower_bound": 21.60279229160082
+            }
+          ],
+          "passed": true
+        },
+        "constructive_measure_separation": {
+          "finite_probability_domain": "all denominator-4 measures on {-2,-1,0,1,2}",
+          "measures": 70,
+          "distinct_pairs_exhausted": 2415,
+          "minimum_integral_gap": "1/4",
+          "passed": true
+        },
+        "tail_truncation_and_uat": {
+          "truncation_error_bound": "delta/2",
+          "global_C0_uat_error_bound": "delta/2",
+          "total_inner_error_bound": "delta",
+          "final_outer_error_bound": "epsilon",
+          "mutated_tail_budget_bound": "3*delta/2",
+          "compact_unbounded_control_family": "Q={delta_0} union {mu_t=(1-t)delta_0+t delta_(t^-1/4): 0<t<=1}, p=2",
+          "radii": [
+            2,
+            4,
+            8,
+            16,
+            32
+          ],
+          "exact_uniform_second_moment_tails": [
+            "1/4",
+            "1/16",
+            "1/64",
+            "1/256",
+            "1/1024"
+          ],
+          "outer_domain_repair": "Apply compact UAT to sigma on a closed delta-neighborhood of the true integral image, not only on the unperturbed image.",
+          "passed": true
+        }
+      },
+      "limitations": [
+        "Five standard measure/topology/UAT results are declared premises rather than formalized in a proof assistant.",
+        "Finite atomic checks are implementation regressions; the universal conclusion follows from the implication chain.",
+        "The literal activation examples in the paper are broader than its written ratio definition; leaky ReLU is used as an unambiguous witness."
+      ],
+      "internal_certificate_passed": true,
+      "independent_checker": {
+        "command": "/repo/.venv/bin/python repro/src/checkers/claim4_independent.py",
+        "exit_code": 0,
+        "passed": true
+      },
+      "check_passed": true,
+      "status": "VERIFIED",
+      "primary_empirical_verification": {
+        "status": "VERIFIED",
+        "claim_scope": "Direct Eq. 6 W_1 continuity for a 1-Lipschitz integrand, measure invariance and separation, plus a destructive p-growth violation.",
+        "seed": 260523160,
+        "wasserstein_pairs": 4096,
+        "max_Kantorovich_Rubinstein_ratio": 0.760925014478016,
+        "wasserstein_range": [
+          6.5462085617447e-08,
+          0.5903993809505964
+        ],
+        "permutation_trials": 2048,
+        "max_permutation_error": 1.5543122344752192e-15,
+        "equal_mean_measure_separation_values": [
+          0.5,
+          0.0
+        ],
+        "growth_violation_control": [
+          {
+            "n": 10,
+            "W1_to_delta0": 0.1,
+            "quadratic_integral": 1.0
+          },
+          {
+            "n": 100,
+            "W1_to_delta0": 0.01,
+            "quadratic_integral": 1.0
+          },
+          {
+            "n": 1000,
+            "W1_to_delta0": 0.001,
+            "quadratic_integral": 1.0
+          },
+          {
+            "n": 10000,
+            "W1_to_delta0": 0.0001,
+            "quadratic_integral": 1.0
+          }
+        ],
+        "independent_checker": {
+          "command": "/repo/.venv/bin/python repro/src/checkers/positive_empirical_independent.py claim4",
+          "exit_code": 0,
+          "result": {
+            "KR_ratio": 0.011843081430481888,
+            "claim": "claim4",
+            "exact_W1": 0.22499999999999998,
+            "growth_control_W1": 0.0001,
+            "growth_control_quadratic_integral": 1.0,
+            "passed": true,
+            "separation_gap": 0.5,
+            "tanh_integral_gap": 0.0026646933218584246
+          },
+          "passed": true
+        },
+        "limitations": "The finite stress test targets the theorem's quantitative continuity mechanism; the accompanying constructive certificate separately exhausts a finite measure domain and audits the implication chain.",
+        "check_passed": true
+      },
+      "historical_toy_regression": {
+        "status": "TOY",
+        "check_passed": true,
+        "continuity_differences": {
+          "0.4": 0.03334611178052661,
+          "0.2": 0.02752858816046025,
+          "0.1": 0.015201058888832539,
+          "0.05": 0.012736907801513292,
+          "0.02": 0.016790439799943283
+        },
+        "separation_values": [
+          0.3333333333333333,
+          0.0
+        ],
+        "subalgebra_addition_constructor_error": 0.0,
+        "subalgebra_product_constructor_error": 0.0,
+        "limitation": "Finite atomic measures do not establish density on arbitrary compact Wasserstein subsets."
+      }
+    },
+    "claim_5_graphon_basis": {
+      "claim": "The Equations 9-10 class is delta_square-continuous and universal on [0,1]-valued graphon space.",
+      "paper_anchors": [
+        "Equations 9-10",
+        "Theorem 4.9",
+        "Theorem 4.10",
+        "Appendix C.2-C.3"
+      ],
+      "quantifiers": {
+        "m": "every finite m >= 2",
+        "F": "every finite simple graph, with isolated vertices harmless",
+        "W": "every [0,1]-valued graphon modulo weak isomorphism",
+        "target": "every continuous real-valued graphon parameter",
+        "accuracy": "every epsilon > 0"
+      },
+      "certificate_type": "symbolic Boolean-lattice derivation plus exhaustive and independent exact checks",
+      "proof_obligations": [
+        {
+          "id": "P1",
+          "kind": "external-premise",
+          "statement": "The [0,1]-valued graphon quotient is compact in delta_square.",
+          "source": "Lovasz, Large Networks and Graph Limits (2012)."
+        },
+        {
+          "id": "P2",
+          "kind": "external-premise",
+          "statement": "Every simple-graph homomorphism density is delta_square-continuous.",
+          "source": "Borgs et al. (2008), Theorem 2.7; arXiv:math/0702004."
+        },
+        {
+          "id": "P3",
+          "kind": "external-premise",
+          "statement": "The linear span of simple homomorphism densities is uniformly dense in continuous graphon parameters.",
+          "source": "Diao et al. (2015), Theorem 2.2; arXiv:1403.3736."
+        },
+        {
+          "id": "D1",
+          "kind": "derived",
+          "depends_on": [],
+          "statement": "Distributivity expands every Equation 9 integrand into 2^(m choose 2) square-free edge monomials."
+        },
+        {
+          "id": "D2",
+          "kind": "derived",
+          "depends_on": [
+            "D1",
+            "P2"
+          ],
+          "statement": "Every Equation 9 function and every Equation 10 linear combination is delta_square-continuous."
+        },
+        {
+          "id": "D3",
+          "kind": "derived",
+          "depends_on": [
+            "D1"
+          ],
+          "statement": "The 0/1 parameter choice for F annihilates every Boolean-lattice term except t(F,W)."
+        },
+        {
+          "id": "D4",
+          "kind": "derived",
+          "depends_on": [
+            "D3"
+          ],
+          "statement": "HD is a subset of F_W for every finite simple graph, including isolated vertices."
+        },
+        {
+          "id": "C",
+          "kind": "conclusion",
+          "depends_on": [
+            "D2",
+            "D4",
+            "P1",
+            "P3"
+          ],
+          "statement": "F_W is continuous and dense in C(graphon quotient, delta_square)."
+        }
+      ],
+      "checks": {
+        "boolean_edge_lattice": {
+          "identity": "prod_e(a_e W_e+b_e)=sum_{S subset E_m}(prod_{e in S}a_e)(prod_{e notin S}b_e) prod_{e in S}W_e",
+          "enumeration_by_vertices": {
+            "2": {
+              "edges": 1,
+              "labeled_simple_graphs": 2,
+              "isolated_exactly": 2
+            },
+            "3": {
+              "edges": 3,
+              "labeled_simple_graphs": 8,
+              "isolated_exactly": 8
+            },
+            "4": {
+              "edges": 6,
+              "labeled_simple_graphs": 64,
+              "isolated_exactly": 64
+            },
+            "5": {
+              "edges": 10,
+              "labeled_simple_graphs": 1024,
+              "isolated_exactly": 1024
+            },
+            "6": {
+              "edges": 15,
+              "labeled_simple_graphs": 32768,
+              "isolated_exactly": 32768
+            }
+          },
+          "total_labeled_graphs_exhausted": 33866,
+          "arbitrary_m_argument": "For target F, set (a_e,b_e)=(1,0) on E(F) and (0,1) otherwise. A subset coefficient is nonzero iff E(F) subset S subset E(F), so S=E(F).",
+          "passed": true
+        },
+        "symbolic_expansion_and_repeated_edge_control": {
+          "symbolic_edges": 6,
+          "symbolic_terms": 64,
+          "expansion_residual": "0",
+          "simple_integrand_second_edge_derivative": "0",
+          "repeated_edge_mutation_second_derivative": "2",
+          "passed": true
+        },
+        "exact_rational_step_graphons": {
+          "target_parametrization_comparisons": [
+            {
+              "graphon": 0,
+              "m": 2,
+              "edge_mask": 0,
+              "complete_model": "1",
+              "hom_density": "1",
+              "equal": true
+            },
+            {
+              "graphon": 0,
+              "m": 2,
+              "edge_mask": 1,
+              "complete_model": "14/27",
+              "hom_density": "14/27",
+              "equal": true
+            },
+            {
+              "graphon": 0,
+              "m": 3,
+              "edge_mask": 0,
+              "complete_model": "1",
+              "hom_density": "1",
+              "equal": true
+            },
+            {
+              "graphon": 0,
+              "m": 3,
+              "edge_mask": 1,
+              "complete_model": "14/27",
+              "hom_density": "14/27",
+              "equal": true
+            },
+            {
+              "graphon": 0,
+              "m": 3,
+              "edge_mask": 3,
+              "complete_model": "13229/48600",
+              "hom_density": "13229/48600",
+              "equal": true
+            },
+            {
+              "graphon": 0,
+              "m": 3,
+              "edge_mask": 7,
+              "complete_model": "21553/145800",
+              "hom_density": "21553/145800",
+              "equal": true
+            },
+            {
+              "graphon": 0,
+              "m": 4,
+              "edge_mask": 0,
+              "complete_model": "1",
+              "hom_density": "1",
+              "equal": true
+            },
+            {
+              "graphon": 0,
+              "m": 4,
+              "edge_mask": 1,
+              "complete_model": "14/27",
+              "hom_density": "14/27",
+              "equal": true
+            },
+            {
+              "graphon": 0,
+              "m": 4,
+              "edge_mask": 5,
+              "complete_model": "13229/48600",
+              "hom_density": "13229/48600",
+              "equal": true
+            },
+            {
+              "graphon": 0,
+              "m": 4,
+              "edge_mask": 13,
+              "complete_model": "62611/437400",
+              "hom_density": "62611/437400",
+              "equal": true
+            },
+            {
+              "graphon": 0,
+              "m": 4,
+              "edge_mask": 63,
+              "complete_model": "1562459257/59049000000",
+              "hom_density": "1562459257/59049000000",
+              "equal": true
+            },
+            {
+              "graphon": 0,
+              "m": 5,
+              "edge_mask": 0,
+              "complete_model": "1",
+              "hom_density": "1",
+              "equal": true
+            },
+            {
+              "graphon": 0,
+              "m": 5,
+              "edge_mask": 1,
+              "complete_model": "14/27",
+              "hom_density": "14/27",
+              "equal": true
+            },
+            {
+              "graphon": 0,
+              "m": 5,
+              "edge_mask": 37,
+              "complete_model": "21553/145800",
+              "hom_density": "21553/145800",
+              "equal": true
+            },
+            {
+              "graphon": 0,
+              "m": 5,
+              "edge_mask": 341,
+              "complete_model": "98488109/2361960000",
+              "hom_density": "98488109/2361960000",
+              "equal": true
+            },
+            {
+              "graphon": 0,
+              "m": 5,
+              "edge_mask": 1023,
+              "complete_model": "1021335552934979/286978140000000000",
+              "hom_density": "1021335552934979/286978140000000000",
+              "equal": true
+            },
+            {
+              "graphon": 1,
+              "m": 2,
+              "edge_mask": 0,
+              "complete_model": "1",
+              "hom_density": "1",
+              "equal": true
+            },
+            {
+              "graphon": 1,
+              "m": 2,
+              "edge_mask": 1,
+              "complete_model": "149/270",
+              "hom_density": "149/270",
+              "equal": true
+            },
+            {
+              "graphon": 1,
+              "m": 3,
+              "edge_mask": 0,
+              "complete_model": "1",
+              "hom_density": "1",
+              "equal": true
+            },
+            {
+              "graphon": 1,
+              "m": 3,
+              "edge_mask": 1,
+              "complete_model": "149/270",
+              "hom_density": "149/270",
+              "equal": true
+            },
+            {
+              "graphon": 1,
+              "m": 3,
+              "edge_mask": 3,
+              "complete_model": "7553/24300",
+              "hom_density": "7553/24300",
+              "equal": true
+            },
+            {
+              "graphon": 1,
+              "m": 3,
+              "edge_mask": 7,
+              "complete_model": "2687/16200",
+              "hom_density": "2687/16200",
+              "equal": true
+            },
+            {
+              "graphon": 1,
+              "m": 4,
+              "edge_mask": 0,
+              "complete_model": "1",
+              "hom_density": "1",
+              "equal": true
+            },
+            {
+              "graphon": 1,
+              "m": 4,
+              "edge_mask": 1,
+              "complete_model": "149/270",
+              "hom_density": "149/270",
+              "equal": true
+            },
+            {
+              "graphon": 1,
+              "m": 4,
+              "edge_mask": 5,
+              "complete_model": "7553/24300",
+              "hom_density": "7553/24300",
+              "equal": true
+            },
+            {
+              "graphon": 1,
+              "m": 4,
+              "edge_mask": 13,
+              "complete_model": "379391/2187000",
+              "hom_density": "379391/2187000",
+              "equal": true
+            },
+            {
+              "graphon": 1,
+              "m": 4,
+              "edge_mask": 63,
+              "complete_model": "2766859/87480000",
+              "hom_density": "2766859/87480000",
+              "equal": true
+            },
+            {
+              "graphon": 1,
+              "m": 5,
+              "edge_mask": 0,
+              "complete_model": "1",
+              "hom_density": "1",
+              "equal": true
+            },
+            {
+              "graphon": 1,
+              "m": 5,
+              "edge_mask": 1,
+              "complete_model": "149/270",
+              "hom_density": "149/270",
+              "equal": true
+            },
+            {
+              "graphon": 1,
+              "m": 5,
+              "edge_mask": 37,
+              "complete_model": "2687/16200",
+              "hom_density": "2687/16200",
+              "equal": true
+            },
+            {
+              "graphon": 1,
+              "m": 5,
+              "edge_mask": 341,
+              "complete_model": "6922333/131220000",
+              "hom_density": "6922333/131220000",
+              "equal": true
+            },
+            {
+              "graphon": 1,
+              "m": 5,
+              "edge_mask": 1023,
+              "complete_model": "74641169/12597120000",
+              "hom_density": "74641169/12597120000",
+              "equal": true
+            }
+          ],
+          "generic_expansion_comparisons": [
+            {
+              "m": 3,
+              "direct": "12846001/36450000",
+              "expanded": "12846001/36450000",
+              "equal": true
+            },
+            {
+              "m": 4,
+              "direct": "2277575437265393/15672832819200000",
+              "expanded": "2277575437265393/15672832819200000",
+              "equal": true
+            }
+          ],
+          "passed": true
+        },
+        "continuity_and_relabel_corroboration": {
+          "checks": [
+            {
+              "m": 2,
+              "edges": 1,
+              "density_gap": 0.0125,
+              "four_e_cut_bound": 0.05625000000000001,
+              "relabel_error": 0.0
+            },
+            {
+              "m": 3,
+              "edges": 3,
+              "density_gap": 0.030341796875,
+              "four_e_cut_bound": 0.2625,
+              "relabel_error": 0.0
+            },
+            {
+              "m": 4,
+              "edges": 3,
+              "density_gap": 0.0028690743152006174,
+              "four_e_cut_bound": 0.11250000000000002,
+              "relabel_error": 0.0
+            },
+            {
+              "m": 5,
+              "edges": 5,
+              "density_gap": 0.002596605194297038,
+              "four_e_cut_bound": 0.125,
+              "relabel_error": 0.0
+            }
+          ],
+          "note": "Quantitative corroboration only; cut-continuity is accepted through the Borgs et al. theorem premise.",
+          "passed": true
+        }
+      },
+      "limitations": [
+        "Graphon compactness, continuity of simple homomorphism densities, and their density theorem are declared primary-source premises.",
+        "The exhaustive m<=6 sweep tests 33,866 labeled graphs but does not replace the arbitrary-m bit-constraint derivation.",
+        "The neural-network-like tensor implementation in Appendix C.3 is not a computational-efficiency claim and is not benchmarked."
+      ],
+      "internal_certificate_passed": true,
+      "independent_checker": {
+        "command": "/repo/.venv/bin/python repro/src/checkers/claim5_independent.py",
+        "exit_code": 0,
+        "passed": true
+      },
+      "check_passed": true,
+      "status": "VERIFIED",
+      "primary_empirical_verification": {
+        "status": "VERIFIED",
+        "claim_scope": "Direct Eq. 9 parametrization, exact-cut-norm continuity and relabel invariance for five homomorphism-density coordinates, plus separation.",
+        "seed": 260523161,
+        "random_step_graphon_pairs": 500,
+        "step_blocks": 7,
+        "cut_norm_computation": "exact exhaustive subset optimization",
+        "cut_norm_range": [
+          0.0419733793018418,
+          0.19021406460825172
+        ],
+        "motif_edge_counts": {
+          "edge_K2": 1,
+          "path_P3": 2,
+          "triangle_K3": 3,
+          "star_K13": 3,
+          "cycle_C4": 4
+        },
+        "maximum_gap_over_cut_norm": {
+          "edge_K2": 1.0000000000000013,
+          "path_P3": 1.074111510455519,
+          "triangle_K3": 0.9568668844621332,
+          "star_K13": 0.9445599607035039,
+          "cycle_C4": 0.6864449644986295
+        },
+        "relabel_trials": 500,
+        "maximum_relabel_error": {
+          "edge_K2": 2.220446049250313e-16,
+          "path_P3": 1.6653345369377348e-16,
+          "triangle_K3": 4.163336342344337e-16,
+          "star_K13": 1.1102230246251565e-16,
+          "cycle_C4": 2.7755575615628914e-17
+        },
+        "eq9_parametrization_graphons": 64,
+        "maximum_eq9_vs_direct_error": {
+          "edge_K2": 2.7755575615628914e-16,
+          "path_P3": 3.608224830031759e-16,
+          "triangle_K3": 2.7755575615628914e-17,
+          "star_K13": 6.938893903907228e-16,
+          "cycle_C4": 5.689893001203927e-16
+        },
+        "same_edge_density_control": {
+          "triangle_plus_isolate": {
+            "edge_K2": 0.375,
+            "path_P3": 0.1875,
+            "triangle_K3": 0.09375,
+            "star_K13": 0.09375,
+            "cycle_C4": 0.0703125
+          },
+          "path4": {
+            "edge_K2": 0.375,
+            "path_P3": 0.15625,
+            "triangle_K3": 0.0,
+            "star_K13": 0.0703125,
+            "cycle_C4": 0.0546875
+          },
+          "edge_gap": 0.0,
+          "triangle_gap": 0.09375
+        },
+        "tight_edge_ratio_control": 1.0000000000000004,
+        "independent_checker": {
+          "command": "/repo/.venv/bin/python repro/src/checkers/positive_empirical_independent.py claim5",
+          "exit_code": 0,
+          "result": {
+            "claim": "claim5",
+            "passed": true,
+            "same_edge_gap": 0.0,
+            "tight_edge_cut_ratio": 1.0000000000000004,
+            "triangle_gap": 0.09375
+          },
+          "passed": true
+        },
+        "limitations": "The sweep directly tests five basis coordinates and the Eq. 9 realization; the symbolic certificate separately exhausts all labeled simple graphs through six vertices and audits the arbitrary-m argument.",
+        "check_passed": true
+      },
+      "historical_toy_regression": {
+        "status": "TOY",
+        "check_passed": true,
+        "edge_h2": 0.5,
+        "edge_t": 0.5,
+        "triangle_h3": 0.17391290045081664,
+        "triangle_t": 0.17391290045081664,
+        "triangle_continuity_gap": 0.004325397927375019,
+        "three_edge_cut_bound": 0.04407243495340718,
+        "limitation": "Two motifs and one graphon pair do not establish HD subset F_W for every simple graph."
+      }
+    },
+    "claim_6_gram_map": {
+      "status": "VERIFIED",
+      "check_passed": true,
+      "primary_empirical_verification": {
+        "status": "VERIFIED",
+        "claim_scope": "Direct Gram-map orthogonal/permutation invariance, Lipschitz behavior, orbit completeness recovery, and invariant hom-density readout.",
+        "seed": 260523162,
+        "radius": 2.0,
+        "group_action_trials": 1000,
+        "max_gram_action_error": 4.440892098500626e-16,
+        "max_two_stage_readout_action_error": 1.4432899320127035e-15,
+        "lipschitz_trials": 1000,
+        "max_lipschitz_ratio": 0.1785166662587531,
+        "theorem_lipschitz_bound": 0.5,
+        "completeness_recovery_trials": 512,
+        "max_recovery_error": 6.7307270867900115e-15,
+        "max_recovered_orthogonality_error": 1.0308742940399845e-14,
+        "nonorthogonal_shear_control": {
+          "orthogonality_gap": 0.24,
+          "gram_gap": 0.02151736147430766,
+          "hom_density_readout_gap": 0.00024000415865610414
+        },
+        "independent_checker": {
+          "command": "/repo/.venv/bin/python repro/src/checkers/positive_empirical_independent.py claim6",
+          "exit_code": 0,
+          "result": {
+            "claim": "claim6",
+            "gram_invariance_error": 5.551115123125783e-17,
+            "nonorthogonal_shear_gram_gap": 0.0645,
+            "passed": true,
+            "recovered_orthogonality_error": 8.881784197001252e-16
+          },
+          "passed": true
+        },
+        "limitations": "The finite stress test targets the two-stage architecture's exact invariance and orbit-detection mechanisms over varied dimensions.",
+        "check_passed": true
+      },
+      "historical_accepted_regression": {
+        "status": "VERIFIED",
+        "check_passed": true,
+        "max_lipschitz_ratio": 0.110688992007003,
+        "bound": 0.5,
+        "gram_invariance_error": 4.718447854656915e-16,
+        "procrustes_recovery_error": 4.440892098500626e-16,
+        "negative_control_gram_gap": 3.8056134550125673
+      }
+    }
+  },
+  "regression_passed": true
+}

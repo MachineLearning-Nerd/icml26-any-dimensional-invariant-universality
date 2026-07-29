@@ -11,10 +11,11 @@ The conservative projected score is **10–12/12** and the best-supported
 possible score is **12/12**, both forecasts—not live judge results.
 
 Published Space revision:
-[`b0dc5a7f233057ffdd81b477589074950001898e`](https://huggingface.co/spaces/DineshAI/wRVTDcEMv8/commit/b0dc5a7f233057ffdd81b477589074950001898e).
-This is the exact revision judged 8/12. The score remains 8/12 until a new
-revision is published and evaluated. Its exact 48-file tree is protected by a
-SHA-256 inventory, and the prior published text tree is mirrored under
+[`eab3d31bec4ecfafa9a28c1c29ab80c70f78865a`](https://huggingface.co/spaces/DineshAI/wRVTDcEMv8/commit/eab3d31bec4ecfafa9a28c1c29ab80c70f78865a).
+This retry is published and awaiting the live judge. The score remains
+**8/12** until the evaluator records a new verdict. The prior 48-file judged
+tree is protected by a SHA-256 inventory, and all 64 published text paths are
+mirrored under
 [`publication/published_space`](publication/published_space).
 
 Key observed numbers:

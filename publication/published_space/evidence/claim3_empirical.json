@@ -1,0 +1,80 @@
+{
+  "status": "VERIFIED",
+  "claim_scope": "Direct Eq. 5 convergence, ell_1 continuity, permutation/zero-padding invariance, and destructive removal of the norm reweighting.",
+  "seed": 260523159,
+  "basel_convergence": [
+    {
+      "n": 10000,
+      "eq5_value": 1.6448340718480599,
+      "absolute_error_to_pi2_over_6": 9.999500016655283e-05
+    },
+    {
+      "n": 100000,
+      "eq5_value": 1.6449240668982266,
+      "absolute_error_to_pi2_over_6": 9.99994999983933e-06
+    },
+    {
+      "n": 1000000,
+      "eq5_value": 1.6449330668487263,
+      "absolute_error_to_pi2_over_6": 9.999995000953277e-07
+    },
+    {
+      "n": 2000000,
+      "eq5_value": 1.6449335668483513,
+      "absolute_error_to_pi2_over_6": 4.999998750587764e-07
+    }
+  ],
+  "basel_exact_limit": 1.6449340668482264,
+  "permutation_zero_padding_trials": 2048,
+  "max_permutation_zero_padding_error": 8.881784197001252e-15,
+  "continuity_trials": 1024,
+  "continuity_bound": "|tau(x)-tau(y)| <= 2 ||x-y||_1",
+  "max_fraction_of_continuity_bound": 0.41269177487740505,
+  "continuity_l1_range": [
+    1.6134423063835048e-07,
+    2.491109374217806
+  ],
+  "dropped_weight_constant_sum": {
+    "256": 256.0,
+    "1024": 1024.0,
+    "4096": 4096.0,
+    "16384": 16384.0
+  },
+  "slow_decay_destructive_control": [
+    {
+      "n": 256,
+      "unweighted_original": 50.19239681528715,
+      "eq5_weighted": 1.7709877248519226
+    },
+    {
+      "n": 1024,
+      "unweighted_original": 120.74188110445357,
+      "eq5_weighted": 1.7772477097205912
+    },
+    {
+      "n": 4096,
+      "unweighted_original": 288.5829463978107,
+      "eq5_weighted": 1.7791119587296649
+    },
+    {
+      "n": 16384,
+      "unweighted_original": 687.8053944062735,
+      "eq5_weighted": 1.7796664372670141
+    }
+  ],
+  "independent_checker": {
+    "command": "/repo/.venv/bin/python repro/src/checkers/positive_empirical_independent.py claim3",
+    "exit_code": 0,
+    "result": {
+      "basel_absolute_error": 9.99999499873283e-07,
+      "basel_n": 1000000,
+      "claim": "claim3",
+      "dropped_weight_growth": 64.0,
+      "passed": true,
+      "permutation_error": 0.0
+    },
+    "passed": true
+  },
+  "limitations": "The sweeps corroborate the exact continuity and invariance mechanisms; the accompanying constructive certificate separately audits point separation and the theorem's implication chain.",
+  "check_passed": true
+}

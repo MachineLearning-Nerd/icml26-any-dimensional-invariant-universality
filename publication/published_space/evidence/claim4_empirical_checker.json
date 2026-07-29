@@ -1,0 +1,15 @@
+{
+  "command": "/repo/.venv/bin/python repro/src/checkers/positive_empirical_independent.py claim4",
+  "exit_code": 0,
+  "result": {
+    "KR_ratio": 0.011843081430481888,
+    "claim": "claim4",
+    "exact_W1": 0.22499999999999998,
+    "growth_control_W1": 0.0001,
+    "growth_control_quadratic_integral": 1.0,
+    "passed": true,
+    "separation_gap": 0.5,
+    "tanh_integral_gap": 0.0026646933218584246
+  },
+  "passed": true
+}

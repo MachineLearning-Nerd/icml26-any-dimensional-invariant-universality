@@ -1,0 +1,28 @@
+{
+  "protected_revision": "b0dc5a7f233057ffdd81b477589074950001898e",
+  "original_file_count": 48,
+  "candidate_file_count": 73,
+  "old_file_set_is_subset": true,
+  "missing_old_paths": [],
+  "old_paths_with_modified_navigation_content": [
+    "README.md",
+    "logbook.json",
+    "pages/index.md",
+    "repro/src/verify.py"
+  ],
+  "modified_originals_archived_byte_exact": true,
+  "archive_mismatches": [],
+  "unchanged_historical_pages": {
+    "pages/claim-1/page.md": true,
+    "pages/claim-2/page.md": true,
+    "pages/claim-3/page.md": true,
+    "pages/claim-4/page.md": true,
+    "pages/claim-5/page.md": true,
+    "pages/claim-6/page.md": true,
+    "pages/current-summary/page.md": true,
+    "pages/reproduce/page.md": true,
+    "pages/visibility-matrix/page.md": true,
+    "pages/verify/page.md": true,
+    "pages/overview/page.md": true
+  }
+}

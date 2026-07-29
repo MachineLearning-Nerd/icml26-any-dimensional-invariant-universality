@@ -1,0 +1,75 @@
+{
+  "status": "VERIFIED",
+  "claim_scope": "Direct Eq. 9 parametrization, exact-cut-norm continuity and relabel invariance for five homomorphism-density coordinates, plus separation.",
+  "seed": 260523161,
+  "random_step_graphon_pairs": 500,
+  "step_blocks": 7,
+  "cut_norm_computation": "exact exhaustive subset optimization",
+  "cut_norm_range": [
+    0.0419733793018418,
+    0.19021406460825172
+  ],
+  "motif_edge_counts": {
+    "edge_K2": 1,
+    "path_P3": 2,
+    "triangle_K3": 3,
+    "star_K13": 3,
+    "cycle_C4": 4
+  },
+  "maximum_gap_over_cut_norm": {
+    "edge_K2": 1.0000000000000013,
+    "path_P3": 1.074111510455519,
+    "triangle_K3": 0.9568668844621332,
+    "star_K13": 0.9445599607035039,
+    "cycle_C4": 0.6864449644986295
+  },
+  "relabel_trials": 500,
+  "maximum_relabel_error": {
+    "edge_K2": 2.220446049250313e-16,
+    "path_P3": 1.6653345369377348e-16,
+    "triangle_K3": 4.163336342344337e-16,
+    "star_K13": 1.1102230246251565e-16,
+    "cycle_C4": 2.7755575615628914e-17
+  },
+  "eq9_parametrization_graphons": 64,
+  "maximum_eq9_vs_direct_error": {
+    "edge_K2": 2.7755575615628914e-16,
+    "path_P3": 3.608224830031759e-16,
+    "triangle_K3": 2.7755575615628914e-17,
+    "star_K13": 6.938893903907228e-16,
+    "cycle_C4": 5.689893001203927e-16
+  },
+  "same_edge_density_control": {
+    "triangle_plus_isolate": {
+      "edge_K2": 0.375,
+      "path_P3": 0.1875,
+      "triangle_K3": 0.09375,
+      "star_K13": 0.09375,
+      "cycle_C4": 0.0703125
+    },
+    "path4": {
+      "edge_K2": 0.375,
+      "path_P3": 0.15625,
+      "triangle_K3": 0.0,
+      "star_K13": 0.0703125,
+      "cycle_C4": 0.0546875
+    },
+    "edge_gap": 0.0,
+    "triangle_gap": 0.09375
+  },
+  "tight_edge_ratio_control": 1.0000000000000004,
+  "independent_checker": {
+    "command": "/repo/.venv/bin/python repro/src/checkers/positive_empirical_independent.py claim5",
+    "exit_code": 0,
+    "result": {
+      "claim": "claim5",
+      "passed": true,
+      "same_edge_gap": 0.0,
+      "tight_edge_cut_ratio": 1.0000000000000004,
+      "triangle_gap": 0.09375
+    },
+    "passed": true
+  },
+  "limitations": "The sweep directly tests five basis coordinates and the Eq. 9 realization; the symbolic certificate separately exhausts all labeled simple graphs through six vertices and audits the arbitrary-m argument.",
+  "check_passed": true
+}

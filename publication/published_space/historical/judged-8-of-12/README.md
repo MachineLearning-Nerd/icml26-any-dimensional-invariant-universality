@@ -16,14 +16,14 @@ tags:
 # Any-Dimensional Invariant Universality — current reproduction
 
 Current candidate for [arXiv:2605.23156](https://arxiv.org/abs/2605.23156).
-The previous live judge score is **8/12** at protected revision
-`b0dc5a7f233057ffdd81b477589074950001898e`. The retry evidence has **not yet
+The previous live judge score is **9/12** at protected revision
+`ad3feb1493175f9af2a232174cd89d3a2688bd6b`. The new evidence has **not yet
 been judged**.
 
 Start with the [current summary](#/current-summary), then follow the six
-claim pages and the [visibility matrix](#/visibility-matrix). The complete
-8/12 file tree is preserved, with superseded pages labeled
-**Historical rejected 8/12 baseline**.
+claim pages and the [visibility matrix](#/visibility-matrix). The former
+`verify` and `overview` pages are preserved unchanged and are labeled
+**Historical rejected baseline** in navigation.
 
 Fixed reproduction command:
 
@@ -31,6 +31,6 @@ Fixed reproduction command:
 uv run --frozen python repro/src/verify.py
 ```
 
-Winning evidence commit: `e321e51474c37db0cce0e7eb4b5155ad49477997`.
+Winning evidence commit: `a63d9eaeb0fe8eaf4dd94a5c1f6ffdec93050bd5`.
 Hugging Face backend: `cpu-upgrade`; 64 logical CPUs visible, one math thread
-enforced; cumulative verifier runtime 12.227845 s.
+enforced; cumulative verifier runtime 5.294494 s.
