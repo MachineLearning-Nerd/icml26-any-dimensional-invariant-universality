@@ -122,7 +122,7 @@ activation-definition caveat.
 
 Important experiment branches:
 
-- [Frozen 9/12 baseline](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/judged-9-of-12-baseline-reconstruction)
-- [Equation 5 certificate](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/claim-3-eq5-proof-certificate)
-- [Equation 6 certificate](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/claim-4-eq6-wasserstein-proof-certificate)
-- [Graphon certificate](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/claim-5-graphon-basis-proof-certificate)
+- [Frozen 9/12 baseline](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/historical/judged-baseline-9-of-12)
+- [Equation 5 certificate](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/audit/c3-eq5-proof)
+- [Equation 6 certificate](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/audit/c4-eq6-wasserstein)
+- [Graphon certificate](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/audit/c5-graphon-basis)
