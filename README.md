@@ -1,68 +1,66 @@
-# Reproducing Any-Dimensional Invariant Universality
+# ICML 2026 — Any-Dimensional Invariant Universality
 
-This repository reproduces [arXiv:2605.23156](https://arxiv.org/abs/2605.23156)
-claim by claim. The latest live evaluator awarded **8/12**: Claims 1 and 2
-received full credit, while the four positive universality claims received one
-point each. This retry makes the direct runner evaluator-visible and adds
-independent stress tests and destructive controls for Claims 3–6.
+[![Open in Molab](https://marimo.io/molab-shield.svg)](https://molab.marimo.io/github/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/blob/main/notebooks/any_dimensional_universality.py)
 
-Current evidence assessment: all six contracts are **VERIFIED** internally.
-The conservative projected score is **10–12/12** and the best-supported
-possible score is **12/12**, both forecasts—not live judge results.
+Independent claim-by-claim reproduction audit for [arXiv:2605.23156](https://arxiv.org/abs/2605.23156), *Any-Dimensional Invariant Universality*.
 
-Published Space revision:
-[`eab3d31bec4ecfafa9a28c1c29ab80c70f78865a`](https://huggingface.co/spaces/DineshAI/wRVTDcEMv8/commit/eab3d31bec4ecfafa9a28c1c29ab80c70f78865a).
-This retry is published and awaiting the live judge. The score remains
-**8/12** until the evaluator records a new verdict. The prior 48-file judged
-tree is protected by a SHA-256 inventory, and all 64 published text paths are
-mirrored under
-[`publication/published_space`](publication/published_space).
+The repository was renamed from `icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality` to `icml26-any-dimensional-invariant-universality` so the public name describes the paper rather than the challenge identifier.
 
-Key observed numbers:
+## What the paper does
 
-- Equation 4 grows **13.743989×** over a 64× horizon, while Equation 5 changes
-  only **0.604959%**.
-- Equation 5 reaches `pi²/6` within **4.999999e-7** at two million terms and
-  passes **3,072** continuity/invariance trials.
-- Equation 6 passes **4,096** exact-Wasserstein pairs and **2,048**
-  permutation trials; an invalid quadratic-growth integral stays at one.
-- Five graphon motifs pass **500** exact-cut-norm pairs; same edge density
-  fails to separate a control that triangle density separates by `0.09375`.
-- The Gram/two-stage route passes **2,512** group, Lipschitz, and orbit
-  recovery trials; a nonorthogonal shear creates a readout gap.
+The paper studies universality for models whose inputs can grow in size, such as graphs and point clouds. It embeds finite inputs and their limits in a suitable infinite-dimensional space, equips the quotient by the relevant symmetries with a useful topology, and develops invariant approximation results on compact sets.
 
-Formal compute: Hugging Face `cpu-upgrade`, no GPU, one enforced math thread.
-The cumulative verifier took 12.227845 seconds; total evidence job duration
-was 37 seconds. The four upgraded claims carry MEDIUM confidence because
-finite sweeps are combined with named density theorems rather than a
-proof-assistant formalization.
+Its six audited claims cover two failure mechanisms and four constructive universality results:
 
-[Read the illustrated 8/12 retry report](reports/8-of-12-retry/report.md) ·
-[Open the tutorial notebook in Molab](https://molab.marimo.io/github/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/blob/main/notebooks/any_dimensional_universality.py)
-[![Open in molab](https://marimo.io/molab-shield.svg)](https://molab.marimo.io/github/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/blob/main/notebooks/any_dimensional_universality.py)
+1. the original infinite DeepSets aggregation can diverge;
+2. nonlinear pointwise maps can be discontinuous in graphon cut norm;
+3. a weighted aggregate repairs continuity and supports universality;
+4. a Wasserstein aggregate supports universality under a growth condition;
+5. the graphon Equation 9 family spans simple-graph homomorphism densities;
+6. a normalized Gram map plus invariant graphon architecture is universal on point-cloud orbits.
 
-## Experiment log
+## Claim and evidence ledger
 
-Every experiment inherited the exact same command:
+The current repository evidence marks all six contracts `VERIFIED`. The historical live evaluator scores remain unchanged: the repository records an earlier 9/12 judged baseline and a later 8/12 retry. Forecasts in the reports are not judge results.
+
+| Claim | Paper anchor | How the claim is produced and checked | Current assessment |
+|---|---|---|---|
+| 1 | Theorem 4.2 — original Equation 4 aggregation | [`verify.py`](repro/src/verify.py) evaluates the assumption-satisfying (X_i=i^{-0.75}\in\ell_2), (ho(x)=\sqrt{|x|}) witness; the partial sum diverges while the weighted control converges | `VERIFIED`, high confidence; one exact asymptotic witness is sufficient |
+| 2 | Theorem 4.9 — nonlinear cut-norm discontinuity | [`verify.py`](repro/src/verify.py) checks (W_n=n1_{[0,1/n]^2}): (|W_n|_\square=1/n), (|W_n^2|_\square=1), and the linear control (|3W_n|_\square=3/n) | `VERIFIED`, high confidence; the cited theorem supplies the full classification, while the reproduction audits the decisive counterexample and control |
+| 3 | Equations 5, Theorems 4.2–4.3 — weighted aggregate | [`certificates/claim3.py`](repro/src/certificates/claim3.py) builds the uniform-tail, algebra, separator, and neural-error implication chain; [`claim3_independent.py`](repro/src/checkers/claim3_independent.py) performs exact-rational constructor and orbit regressions | `VERIFIED`, medium confidence; finite checks corroborate a certificate using named compactness, Stone–Weierstrass, and UAT premises |
+| 4 | Equation 6, Theorems 4.5–4.6 — Wasserstein aggregate | [`certificates/claim4.py`](repro/src/certificates/claim4.py) combines (W_p) continuity, measure separation, compact tail truncation, and global (C_0) UAT; [`claim4_independent.py`](repro/src/checkers/claim4_independent.py) runs exact transport and controls | `VERIFIED`, medium confidence; the growth-condition interpretation uses leaky ReLU because the paper’s ratio-to-polynomial wording is ambiguous for some named activations |
+| 5 | Equations 9–10, Theorems 4.9–4.10 — graphon basis | [`certificates/claim5.py`](repro/src/certificates/claim5.py) proves the arbitrary-(m) Boolean-lattice expansion isolates every finite simple graph; [`claim5_independent.py`](repro/src/checkers/claim5_independent.py) checks exact rational graphons and rejects repeated-edge mutations | `VERIFIED`, high confidence; the universal step is the symbolic arbitrary-(m) argument, not only the finite graph sweep |
+| 6 | Equations 12 and 14, Theorems 4.12–4.13 — Gram/orbit universality | [`verify.py`](repro/src/verify.py) checks the radius-(R) Lipschitz bound, Gram invariance, orthogonal recovery, and a distinct-Gram control | `VERIFIED`, high confidence; numerical checks corroborate the constructive ingredients while the cited invariant-network density theorem supplies the universal scope |
+
+### Common evidence path
+
+Every claim follows the same chain:
+
+`paper anchor → exact claim contract → executable certificate or witness → independent checker/control → raw evidence → cumulative verifier → report`
+
+Run the cumulative audit with:
 
 ```bash
 uv run --frozen python repro/src/verify.py
 ```
 
-| Branch / experiment | Purpose or change | Exact run command | Assessment / outcome | Compute |
-| --- | --- | --- | --- | --- |
-| `main` | Public README, report, and notebook | Not run as an experiment (publication surface) | Presentation-only | None |
-| [Judged baseline](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/judged-9-of-12-baseline-reconstruction) | Reconstruct live 9/12 state | `uv run --frozen python repro/src/verify.py` | Claims 1,2,6 VERIFIED; 3–5 historical TOY | HF `cpu-upgrade`, 21 s |
-| [Claim 3 certificate](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/claim-3-eq5-proof-certificate) | Replace one-target fit with Eq. 5 implication certificate | `uv run --frozen python repro/src/verify.py` | Claim 3 VERIFIED; cumulative pass | HF `cpu-upgrade`, 4m57s including startup |
-| [Claim 4 certificate](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/claim-4-eq6-wasserstein-proof-certificate) | Add Wasserstein tail/noncompact-UAT certificate | `uv run --frozen python repro/src/verify.py` | Claim 4 VERIFIED, MEDIUM confidence; cumulative pass | HF `cpu-upgrade`, 21 s |
-| [Claim 5 certificate](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/claim-5-graphon-basis-proof-certificate) | Add arbitrary-m Boolean-lattice certificate | `uv run --frozen python repro/src/verify.py` | Claim 5 VERIFIED; all six cumulative claims pass | HF `cpu-upgrade`, 26 s |
-| [Release candidate](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/evaluator-visible-release-candidate) | Package canonical Space pages, report, notebook, manifests, and red-team audit | `uv run --frozen python repro/src/verify.py` | All six cumulative claim checks pass; packaging gates complete | HF `cpu-upgrade` |
-| [Published mirror](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/published-space-and-github-mirror) | Mirror exact published Space revision and finalize GitHub surface | `uv run --frozen python repro/src/verify.py` | 36/36 published text hashes match; all six cumulative checks pass | HF `cpu-upgrade` |
-| [Claims 3–4 direct retry](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/claims-3-4-evaluator-visible-empirical-verificat) | Million-term Eq. 5 and exact-W1 Eq. 6 stress tests | `uv run --frozen python repro/src/verify.py` | Direct checks and cumulative regression pass | HF `cpu-upgrade`, 32 s |
-| [Claims 5–6 direct retry](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/claims-5-6-direct-graphon-and-orbit-verification) | Exact-cut graphons and large orbit/two-stage sweeps | `uv run --frozen python repro/src/verify.py` | Direct checks and cumulative regression pass | HF `cpu-upgrade`, 32 s |
-| [8/12 retry candidate](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/8-of-12-retry-evaluator-visible-candidate) | Inline source, raw evidence, historical preservation, blind traversal | `uv run --frozen python repro/src/verify.py` | Six claims pass; evaluator-visible audit complete | HF `cpu-upgrade`, 37 s |
+The evaluator-facing contracts and raw outputs are under [`publication/space_files`](publication/space_files); the independent synthesis reports are [`reports/claim-by-claim/report.md`](reports/claim-by-claim/report.md) and [`reports/8-of-12-retry/report.md`](reports/8-of-12-retry/report.md).
+
+## Key evidence
+
+| Result | Recorded evidence |
+|---|---|
+| Equation 4 failure | 13.743989× growth over a 64× horizon for the divergent witness |
+| Equation 5 repair | 0.604959% change on the same horizon; 2,000,000-term Basel check reaches (π^2/6) within (4.999999\times10^{-7}) |
+| Equation 6 | 4,096 exact (W_1) pairs and 2,048 invariance trials in the retry; invalid growth controls fail as intended |
+| Graphon Equation 9 | 33,866 labeled simple graphs through six vertices isolated exactly in the proof certificate; exact-cut direct retry also passes |
+| Point-cloud orbits | 2,512 group, Lipschitz, and recovery trials in the retry; a nonorthogonal shear produces a nonzero control gap |
+
+Finite sweeps are regression evidence. The universal claims rely on the explicit implication certificates and named mathematical premises; they are not presented as proof-assistant formalizations.
 
 ## Reproduce locally
+
+Dependencies are pinned by [`pyproject.toml`](pyproject.toml) and [`uv.lock`](uv.lock). No GPU is required.
 
 ```bash
 uv sync --frozen
@@ -70,5 +68,66 @@ uv run --frozen python repro/src/verify.py
 marimo edit notebooks/any_dimensional_universality.py
 ```
 
-The formal evidence is the fixed verifier output. The notebook opens with
-embedded results and does not require an expensive rerun.
+The notebook opens with embedded evidence and does not require an expensive rerun. Formal jobs used Hugging Face `cpu-upgrade` with numerical libraries restricted to one math thread; command and run details are in the reports and Space logbook.
+
+## Branch map
+
+The live branch names describe their evidence role:
+
+| Branch family | Purpose |
+|---|---|
+| [`historical/judged-baseline-9-of-12`](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/historical/judged-baseline-9-of-12) | Preserve the earlier 9/12 judged baseline |
+| [`audit/c3-eq5-proof`](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/audit/c3-eq5-proof) | Build the Equation 5 continuity/universality certificate |
+| [`audit/c4-eq6-wasserstein`](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/audit/c4-eq6-wasserstein) | Build the Equation 6 Wasserstein certificate and growth controls |
+| [`audit/c5-graphon-basis`](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/audit/c5-graphon-basis) | Prove the arbitrary-(m) graphon Boolean-lattice basis |
+| [`audit/c3-c4-direct-verification`](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/audit/c3-c4-direct-verification) | Direct Equation 5 and Equation 6 retry stress tests |
+| [`audit/c5-c6-direct-verification`](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/audit/c5-c6-direct-verification) | Direct graphon and point-cloud orbit verification |
+| [`release/evaluator-candidate`](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/release/evaluator-candidate) | Package evaluator-visible pages and release artifacts |
+| [`release/final-retry-gates`](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/release/final-retry-gates) | Final retry evidence and release gates |
+| [`release/published-retry-mirror`](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/release/published-retry-mirror) | Mirror the published retry and GitHub main surface |
+| [`release/published-space-mirror`](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/release/published-space-mirror) | Mirror the published Space revision and hashes |
+| [`release/8-of-12-retry`](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/release/8-of-12-retry) | Evaluator-visible 8/12 retry candidate |
+
+[`branch-audit.md`](branch-audit.md) records the exact old-to-new mapping and the claim lineage for every branch.
+
+## Repository contents
+
+- `repro/src/` — witnesses, proof certificates, independent checkers, and cumulative verifier.
+- `reports/` — illustrated claim-by-claim and retry reports.
+- `publication/space_files/` — evaluator-facing pages, claim contracts, raw evidence, controls, and release manifests.
+- `publication/published_space/` — mirrored published Space content and historical snapshots.
+- `notebooks/` — interactive evidence-first tutorial.
+
+## Scope and limitations
+
+- The historical 9/12 and 8/12 scores are preserved records, not results of this documentation update.
+- Finite numerical trials cannot prove universal density theorems by themselves.
+- Claims 3–6 combine executable implication checks with named compactness, density, and UAT premises; no Lean/Coq proof-kernel formalization is included.
+- Claim 4 uses leaky ReLU to satisfy the literal asymptotic-growth contract; this is documented as an interpretation choice rather than hidden.
+- The original paper authors’ claims and the independent audit’s evidence are kept distinct.
+
+## Citation
+
+```bibtex
+@misc{yao2026anydimensional,
+  title         = {Any-Dimensional Invariant Universality},
+  author        = {Yao, Shengtai and Levin, Eitan and D{\'i}az, Mateo},
+  year          = {2026},
+  eprint        = {2605.23156},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2605.23156}
+}
+```
+
+## Thank you
+
+Thank you to Shengtai Yao, Eitan Levin, and Mateo Díaz for developing a clear framework for reasoning about continuity, symmetry, and universality when input dimensions grow. This independent audit is intended to make the paper’s assumptions, constructive steps, and failure mechanisms easier to inspect and reproduce.
+
+## Attribution
+
+Repository maintenance commits in the cleaned branch histories use:
+
+`MachineLearning-Nerd <37579156+MachineLearning-Nerd@users.noreply.github.com>`
+
+The paper and its authors remain the source of the research claims; this repository contains an independent reproduction and audit record.

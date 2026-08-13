@@ -107,6 +107,6 @@ upgraded claims carry MEDIUM confidence.
 
 Important branches:
 
-- [Claims 3–4 direct verification](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/claims-3-4-evaluator-visible-empirical-verificat)
-- [Claims 5–6 direct verification](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/claims-5-6-direct-graphon-and-orbit-verification)
-- [Evaluator-visible retry candidate](https://github.com/MachineLearning-Nerd/icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality/tree/orx/8-of-12-retry-evaluator-visible-candidate)
+- [Claims 3–4 direct verification](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/audit/c3-c4-direct-verification)
+- [Claims 5–6 direct verification](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/audit/c5-c6-direct-verification)
+- [Evaluator-visible retry candidate](https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality/tree/release/8-of-12-retry)
