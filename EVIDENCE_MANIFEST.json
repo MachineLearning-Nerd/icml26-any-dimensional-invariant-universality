@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "source": {
+    "arxiv": "2605.23156",
+    "revision": "v1",
+    "url": "https://arxiv.org/abs/2605.23156",
+    "html_sha256": "08550eb2200d91fcba610f1008e7cb0e207049aee014b5d31f9f5501d6cda5f3",
+    "source_sha256": "86929d4f4e75744d3ce0bc8c100003febd6bb4130a85d1faa2414c02db5aae0b"
+  },
+  "required_paths": [
+    "README.md",
+    "branch-audit.md",
+    "STATUS.md",
+    "CLAIM_EVIDENCE.md",
+    "SOURCE_AUDIT.md",
+    "ENVIRONMENT.md",
+    "REPORT.md",
+    "AUTHOR_THANK_YOU.md",
+    "CITATION.cff",
+    "claims.json",
+    "reproduction_verdicts.json",
+    "AUTONOMOUS_STATE.json",
+    "verify_final.py",
+    "pyproject.toml",
+    "uv.lock",
+    "repro/src/verify.py",
+    "repro/src/certificates/claim3.py",
+    "repro/src/certificates/claim4.py",
+    "repro/src/certificates/claim5.py",
+    "repro/src/checkers/claim3_independent.py",
+    "repro/src/checkers/claim4_independent.py",
+    "repro/src/checkers/claim5_independent.py",
+    ".openresearch/protected/live_verdict_summary.json",
+    ".openresearch/protected/paper_source_audit.json",
+    "publication/published_space/evidence/cumulative_result.json",
+    "publication/published_space/evidence/retry_cumulative_result.json",
+    "publication/published_space/release/subset_check.json",
+    "publication/published_space/release/retry_subset_check.json",
+    "publication/published_space/release/upload_manifest.sha256",
+    "publication/published_space/release/retry_upload_manifest.sha256"
+  ],
+  "artifacts": [
+    {"path": ".openresearch/protected/live_verdict_summary.json", "sha256": "d7c17683af75e5594a04543cc14d2a0d9b5f45fdf411ef85590cec09140c57f8", "purpose": "Historical 9/12 verdict record"},
+    {"path": ".openresearch/protected/paper_source_audit.json", "sha256": "63d996d7f5bf7e58784c742603db4c9fa933dc9c08bc57d1730ca53e3cc85282", "purpose": "Paper source and exact-quantifier audit"},
+    {"path": "publication/published_space/evidence/cumulative_result.json", "sha256": "6e708ca7f73e6a6d5838236b57b0861316fd60aa5e8bd2553219ac74637a18c8", "purpose": "Baseline cumulative result"},
+    {"path": "publication/published_space/evidence/retry_cumulative_result.json", "sha256": "da31f4d7279d78dba7af8b815cb526f85f8c6412058e55c2e72ce8eb5cc09461", "purpose": "8/12 retry cumulative result"},
+    {"path": "publication/published_space/release/subset_check.json", "sha256": "18f5311617302f31d1680b408b656773982291bebba5650f07d89a8c0da25635", "purpose": "Baseline protected subset check"},
+    {"path": "publication/published_space/release/retry_subset_check.json", "sha256": "2ff147357468ced2d9d03b1ea05440b5faf51ff4cdb27c8765453236c7af369d", "purpose": "Retry protected subset check"}
+  ]
+}

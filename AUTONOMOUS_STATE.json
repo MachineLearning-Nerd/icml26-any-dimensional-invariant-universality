@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repository": "MachineLearning-Nerd/icml26-any-dimensional-invariant-universality",
+  "paper": "arXiv:2605.23156",
+  "phase": "documentation_and_attribution_normalization",
+  "overall_status": "ALL_C1_C6_VERIFIED_SCOPED_C3_C4_C5_C6_MEDIUM_HISTORICAL_SCORES_9_OF_12_AND_8_OF_12_NO_CURRENT_SCORE",
+  "branch_count_expected": 12,
+  "reachable_commit_count_expected": 27,
+  "canonical_identity": "MachineLearning-Nerd <MachineLearning-Nerd@users.noreply.github.com>",
+  "historical_scores": ["9/12", "8/12"],
+  "current_score_claim": false,
+  "publication_allowed": false,
+  "official_author_endorsement": false,
+  "recovery_bundle": {
+    "path": "/tmp/icml-invariant-universality-before-normalization.0Oir4E/icml-invariant-universality-before-normalization.bundle",
+    "sha256": "bf99559118503d015838ded660070accfc004749030a8a2c53c856262dd9bb3b"
+  },
+  "next_action": "Rewrite all reachable commit metadata, publish documentation, force-update the twelve descriptive heads, and verify from a fresh clone."
+}

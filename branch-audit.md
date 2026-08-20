@@ -35,7 +35,7 @@ The repository was renamed from `icml26-repro-wRVTDcEMv8-any-dimensional-invaria
 
 ## Attribution and verification policy
 
-- Clean maintenance commits use `MachineLearning-Nerd <37579156+MachineLearning-Nerd@users.noreply.github.com>`.
+- Clean maintenance commits use `MachineLearning-Nerd <MachineLearning-Nerd@users.noreply.github.com>`.
 - Branch cleanup changes labels and links, not the scientific evidence or its limitations.
 - Historical score records remain labeled historical and must not be presented as new evaluator results.
 - Release branches are candidate publication surfaces until the external evaluator runs them.

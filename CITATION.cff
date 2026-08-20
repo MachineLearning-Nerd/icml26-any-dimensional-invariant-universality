@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: "Any-Dimensional Invariant Universality: Reproduction Audit"
+message: "If this audit or its evidence package is useful, please cite the original paper and this repository."
+type: software
+authors:
+  - family-names: Yao
+    given-names: Shengtai
+  - family-names: Levin
+    given-names: Eitan
+  - family-names: Díaz
+    given-names: Mateo
+repository-code: "https://github.com/MachineLearning-Nerd/icml26-any-dimensional-invariant-universality"
+url: "https://arxiv.org/abs/2605.23156"
+date-released: 2026-08-20
+keywords:
+  - invariant universality
+  - graphons
+  - point clouds
+  - reproducibility

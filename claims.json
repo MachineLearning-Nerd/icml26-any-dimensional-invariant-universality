@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "repository": "MachineLearning-Nerd/icml26-any-dimensional-invariant-universality",
+  "overall_status": "ALL_C1_C6_VERIFIED_SCOPED_C3_C4_C5_C6_MEDIUM_HISTORICAL_SCORES_9_OF_12_AND_8_OF_12_NO_CURRENT_SCORE",
+  "paper": {
+    "title": "Any-Dimensional Invariant Universality",
+    "authors": ["Shengtai Yao", "Eitan Levin", "Mateo Díaz"],
+    "arxiv": "2605.23156",
+    "revision": "v1",
+    "url": "https://arxiv.org/abs/2605.23156"
+  },
+  "claims": [
+    {"id": "C1", "status": "VERIFIED_SCOPED_HIGH", "paper_surface": "Theorem 4.2 / Equation 4", "production": "Exact ell_2 witness produces divergent original aggregation and convergent weighted repair.", "result": "64x horizon growth ratio 13.743989; weighted change 0.604959%."},
+    {"id": "C2", "status": "VERIFIED_SCOPED_HIGH", "paper_surface": "Theorem 4.9 / cut norm", "production": "Spike graphons W_n=n 1_[0,1/n]^2 test nonlinear square and linear controls.", "result": "Cut norms are 1/n, 1, and 3/n across the declared n values."},
+    {"id": "C3", "status": "VERIFIED_SCOPED_MEDIUM", "paper_surface": "Equation 5 / Theorems 4.2–4.3", "production": "Machine-checkable tail/algebra/separation/UAT implication certificate plus exact constructors and orbit regressions.", "result": "Certificate and direct checks pass; named compactness, Stone–Weierstrass, and UAT premises remain external."},
+    {"id": "C4", "status": "VERIFIED_SCOPED_MEDIUM", "paper_surface": "Equation 6 / Theorems 4.5–4.6", "production": "Wasserstein continuity/separation/tail/UAT certificate plus exact transport and invalid-growth controls.", "result": "Certificate and retry direct checks pass; leaky ReLU is the disclosed growth interpretation."},
+    {"id": "C5", "status": "VERIFIED_SCOPED_MEDIUM", "paper_surface": "Equations 9–10 / Theorems 4.9–4.10", "production": "Arbitrary-m Boolean-lattice expansion isolates every finite simple graph; exact graphon checks reject repeated-edge mutations.", "result": "33,866 labeled graphs through six vertices and symbolic residual 0."},
+    {"id": "C6", "status": "VERIFIED_SCOPED_MEDIUM", "paper_surface": "Equations 12 and 14 / Theorems 4.12–4.13", "production": "Radius/Lipschitz/Gram/recovery construction plus independent point-cloud orbit trials.", "result": "2,512 retry trials pass; nonorthogonal shear control gap is nonzero."}
+  ],
+  "historical_external_results": [
+    {"score": "9/12", "space": "DineshAI/wRVTDcEMv8", "judged_at": "2026-07-28", "current_score_claim": false},
+    {"score": "8/12", "space_revision": "b0dc5a7f233057ffdd81b477589074950001898e", "current_score_claim": false}
+  ],
+  "publication": {
+    "publication_allowed": false,
+    "official_author_endorsement": false,
+    "author_endorsement_claimed": false
+  }
+}

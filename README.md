@@ -6,6 +6,11 @@ Independent claim-by-claim reproduction audit for [arXiv:2605.23156](https://arx
 
 The repository was renamed from `icml26-repro-wRVTDcEMv8-any-dimensional-invariant-universality` to `icml26-any-dimensional-invariant-universality` so the public name describes the paper rather than the challenge identifier.
 
+> **Audit status:** `ALL_C1_C6_VERIFIED_SCOPED_C3_C4_C5_C6_MEDIUM_HISTORICAL_SCORES_9_OF_12_AND_8_OF_12_NO_CURRENT_SCORE`.
+> All six claim contracts pass in the current evidence package. Claims 1–2 are high-confidence witnesses/checks; Claims 3–6 are medium-confidence implication certificates plus finite/direct evidence that retain named compactness, density, UAT, and activation-interpretation premises. The historical 9/12 baseline and 8/12 retry scores are preserved, not replaced by a new judge score.
+
+The detailed claim production paths are in [`CLAIM_EVIDENCE.md`](CLAIM_EVIDENCE.md), source and premise boundaries in [`SOURCE_AUDIT.md`](SOURCE_AUDIT.md), environment notes in [`ENVIRONMENT.md`](ENVIRONMENT.md), and machine-readable verdicts in [`claims.json`](claims.json) and [`reproduction_verdicts.json`](reproduction_verdicts.json). [`verify_final.py`](verify_final.py) checks the published branch set, evidence hashes, retry records, and claim boundaries.
+
 ## What the paper does
 
 The paper studies universality for models whose inputs can grow in size, such as graphs and point clouds. It embeds finite inputs and their limits in a suitable infinite-dimensional space, equips the quotient by the relevant symmetries with a useful topology, and develops invariant approximation results on compact sets.
